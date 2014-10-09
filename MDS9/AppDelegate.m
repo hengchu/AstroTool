@@ -26,10 +26,12 @@
                                                       backing:NSBackingStoreBuffered
                                                         defer:NO];
   // Titlebar styling.
-  self.window.titleBarHeight         = 44.0f;
+  self.window.titleBarHeight         = 40.0f;
   self.window.showsBaselineSeparator = NO;
   self.window.titleBarStartColor     = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
   self.window.titleBarEndColor       = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0];
+  
+  self.window.trafficLightButtonsLeftMargin = 10;
 
   self.mainVC = [[MDSMainViewController alloc] initWithNibName:@"MDSMainViewController" bundle:[NSBundle mainBundle]];
   
