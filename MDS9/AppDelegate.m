@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MDSMainViewController.h"
 #import "MDSMenuController.h"
+#import <PureLayout/PureLayout.h>
 
 @interface AppDelegate ()
 
@@ -24,7 +25,7 @@
                                             styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask
                                               backing:NSBackingStoreBuffered
                                                 defer:NO];
-  [self.window makeKeyAndOrderFront:self];
+
   self.mainVC = [[MDSMainViewController alloc] initWithNibName:@"MDSMainViewController" bundle:[NSBundle mainBundle]];
   
   NSNib *menuNib                    = [[NSNib alloc] initWithNibNamed:@"MDSMenu" bundle:[NSBundle mainBundle]];
@@ -33,9 +34,10 @@
   [menuNib instantiateWithOwner:menuController topLevelObjects:nil];
   
   menuController.delegate = self.mainVC;
-  
-  [[NSApplication sharedApplication] setMainMenu:menuController.menu];
   self.window.contentView = self.mainVC.view;
+  [[NSApplication sharedApplication] setMainMenu:menuController.menu];
+  
+  [self.window makeKeyAndOrderFront:self];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
