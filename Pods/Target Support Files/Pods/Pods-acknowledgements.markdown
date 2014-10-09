@@ -1,6 +1,10 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## INAppStoreWindow
+
+INAppStoreWindow is licensed under the BSD license.
+
 ## PureLayout
 
 This code is distributed under the terms and conditions of the MIT license.

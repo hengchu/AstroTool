@@ -21,16 +21,20 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   // Insert code here to initialize your application
-  self.window = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 600, 800)
-                                            styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask
-                                              backing:NSBackingStoreBuffered
-                                                defer:NO];
+  self.window = [[INAppStoreWindow alloc] initWithContentRect:NSMakeRect(0, 0, 600, 800)
+                                                    styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask
+                                                      backing:NSBackingStoreBuffered
+                                                        defer:NO];
+  // Titlebar styling.
+  self.window.titleBarHeight         = 44.0f;
+  self.window.showsBaselineSeparator = NO;
+  self.window.titleBarStartColor     = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
+  self.window.titleBarEndColor       = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0];
 
   self.mainVC = [[MDSMainViewController alloc] initWithNibName:@"MDSMainViewController" bundle:[NSBundle mainBundle]];
   
   NSNib *menuNib                    = [[NSNib alloc] initWithNibNamed:@"MDSMenu" bundle:[NSBundle mainBundle]];
   MDSMenuController *menuController = [[MDSMenuController alloc] init];
-
   [menuNib instantiateWithOwner:menuController topLevelObjects:nil];
   
   menuController.delegate = self.mainVC;
