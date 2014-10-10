@@ -7,13 +7,14 @@
 //
 
 #import "AppDelegate.h"
-#import "MDSMainViewController.h"
+#import "MDSCenterViewController.h"
 #import "MDSMenuController.h"
+#import "MDSTitleBarAccessoryViewController.h"
 #import <PureLayout/PureLayout.h>
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) MDSMainViewController *mainVC;
+@property (nonatomic, strong) MDSCenterViewController *mainVC;
 
 @end
 
@@ -21,19 +22,15 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   // Insert code here to initialize your application
-  self.window = [[INAppStoreWindow alloc] initWithContentRect:NSMakeRect(0, 0, 600, 800)
+  self.window = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 600, 800)
                                                     styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask
                                                       backing:NSBackingStoreBuffered
                                                         defer:NO];
-  // Titlebar styling.
-  self.window.titleBarHeight         = 40.0f;
-  self.window.showsBaselineSeparator = NO;
-  self.window.titleBarStartColor     = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
-  self.window.titleBarEndColor       = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0];
   
-  self.window.trafficLightButtonsLeftMargin = 10;
-
-  self.mainVC = [[MDSMainViewController alloc] initWithNibName:@"MDSMainViewController" bundle:[NSBundle mainBundle]];
+  self.mainVC = [[MDSCenterViewController alloc] initWithNibName:@"MDSMainViewController" bundle:[NSBundle mainBundle]];
+  
+  MDSTitleBarAccessoryViewController *titleVC = [[MDSTitleBarAccessoryViewController alloc] initWithNibName:@"MDSTitleBarAccessoryViewController" bundle:[NSBundle mainBundle]];
+  [self.window addTitlebarAccessoryViewController:titleVC];
   
   NSNib *menuNib                    = [[NSNib alloc] initWithNibNamed:@"MDSMenu" bundle:[NSBundle mainBundle]];
   MDSMenuController *menuController = [[MDSMenuController alloc] init];

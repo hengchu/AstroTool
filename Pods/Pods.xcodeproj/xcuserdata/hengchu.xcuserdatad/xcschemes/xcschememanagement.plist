@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-INAppStoreWindow.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-PureLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>32D2F021295366E4D624D560</key>
+		<key>AF5405DCE81447E5783C6359</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D6E454E094B2528FFEE43FC7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EA80F0A8C35E97075D5653EC</key>
+		<key>B45FE90CE02F8CE5956AFD0D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

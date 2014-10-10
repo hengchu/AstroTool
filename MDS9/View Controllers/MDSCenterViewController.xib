@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MDSMainViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="MDSCenterViewController">
             <connections>
                 <outlet property="frameView" destination="rze-3M-hPG" id="T7o-4X-Oo4"/>
                 <outlet property="urlLabel" destination="EgA-wx-Hry" id="eWa-kX-UCe"/>

@@ -7,11 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <INAppStoreWindow/INAppStoreWindow.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
-@property (strong, nonatomic) INAppStoreWindow *window;
+@property (strong, nonatomic) NSWindow *window;
 
 @end
 

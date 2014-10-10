@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Hengchu Zhang. All rights reserved.
 //
 
-#import "MDSMainViewController.h"
+#import "MDSCenterViewController.h"
 #import "MDSFrameView.h"
 
-@interface MDSMainViewController ()
+@interface MDSCenterViewController ()
 
 @property (weak) IBOutlet NSTextFieldCell *urlLabel;
 @property (weak) IBOutlet MDSFrameView *frameView;
 
 @end
 
-@implementation MDSMainViewController
+@implementation MDSCenterViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];

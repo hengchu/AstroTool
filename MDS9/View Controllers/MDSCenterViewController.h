@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "MDSMenuController.h"
 
-@interface MDSMainViewController : NSViewController <MDSMenuControllerDelegate>
+@interface MDSCenterViewController : NSViewController <MDSMenuControllerDelegate>
 
 /**
  *  Delegate call back for @p MDSMenuControllerDelegate.

@@ -1,13 +1,10 @@
 PODS:
-  - INAppStoreWindow (1.4)
   - PureLayout (1.1.0)
 
 DEPENDENCIES:
-  - INAppStoreWindow
   - PureLayout (~> 1.1)
 
 SPEC CHECKSUMS:
-  INAppStoreWindow: 570e4a9768aaac643ef2129d9b018aca2e0157b3
   PureLayout: c8960fa0f3b40d849d5e177d699d0148faa63b63
 
-COCOAPODS: 0.34.1
+COCOAPODS: 0.34.2
