@@ -7,6 +7,7 @@
 //
 
 #import "MDSCenterViewController.h"
+#import "MDSTheme.h"
 #import "MDSFrameView.h"
 
 @interface MDSCenterViewController ()
@@ -23,6 +24,8 @@
   [super viewDidLoad];
   // Do view setup here.
   [self.urlLabel setStringValue:@"Select a file..."];
+  self.view.wantsLayer = YES;
+  self.view.layer.backgroundColor = [MDSTheme panelColor].CGColor;
 }
 
 #pragma mark - Setters

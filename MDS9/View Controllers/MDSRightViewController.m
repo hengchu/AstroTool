@@ -9,6 +9,7 @@
 #import "MDSRightViewController.h"
 #import "NSArray+Map.h"
 #import "MDSHeaderTableRowView.h"
+#import "MDSTheme.h"
 #import <PureLayout/PureLayout.h>
 
 @interface MDSRightViewController () <NSTableViewDataSource, NSTableViewDelegate>
@@ -28,7 +29,11 @@
   
   self.headerView.dataSource = self;
   self.headerView.delegate = self;
+  self.headerView.backgroundColor = [MDSTheme panelColor];
   [self.headerView setHeaderView:nil];
+  
+  self.stackView.wantsLayer = YES;
+  self.stackView.layer.backgroundColor = [MDSTheme panelColor].CGColor;
 }
 
 - (void)viewWillAppear
@@ -54,7 +59,6 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-  NSLog(@"%ld", self.headers.count);
   return self.headers.count;
 }
 
@@ -64,11 +68,11 @@
   
   MDSHeaderTableRowView *view = [[MDSHeaderTableRowView alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
   
-  view.key = key;
-  view.value = value;
+  view.key     = key;
+  view.value   = value;
   view.comment = comment;
-  
-  NSSize size = view.intrinsicContentSize;
+
+  NSSize size  = view.intrinsicContentSize;
   
   return size.height;
 }
@@ -79,16 +83,15 @@
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row
 {
+  
   RACTupleUnpack(NSString *key, NSString *value, NSString *comment) = self.headers[row];
   
   MDSHeaderTableRowView *view = [[MDSHeaderTableRowView alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
   
-  NSLog(@"%@ : %@", key, value);
-  
-  view.key = key;
-  view.value = value;
-  view.comment = comment;
-  view.wantsLayer = YES;
+  view.key                   = key;
+  view.value                 = value;
+  view.comment               = comment;
+  view.wantsLayer            = YES;
   view.layer.backgroundColor = [NSColor clearColor].CGColor;
   
   NSSize size = view.intrinsicContentSize;

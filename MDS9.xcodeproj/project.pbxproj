@@ -37,6 +37,7 @@
 		9BE1444D19E3B4FA00FB2294 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444C19E3B4FA00FB2294 /* AppDelegate.m */; };
 		9BE1444F19E3B4FA00FB2294 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1444E19E3B4FA00FB2294 /* Images.xcassets */; };
 		9BE1445E19E3B4FA00FB2294 /* MDS9Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1445D19E3B4FA00FB2294 /* MDS9Tests.m */; };
+		9BFFF50519EDE4DD0074C570 /* MDSTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFF50419EDE4DD0074C570 /* MDSTheme.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,8 @@
 		9BE1445719E3B4FA00FB2294 /* MDS9Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MDS9Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE1445C19E3B4FA00FB2294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE1445D19E3B4FA00FB2294 /* MDS9Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDS9Tests.m; sourceTree = "<group>"; };
+		9BFFF50319EDE4DD0074C570 /* MDSTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSTheme.h; path = Theme/MDSTheme.h; sourceTree = "<group>"; };
+		9BFFF50419EDE4DD0074C570 /* MDSTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSTheme.m; path = Theme/MDSTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +324,7 @@
 		9BE1443B19E3B4FA00FB2294 = {
 			isa = PBXGroup;
 			children = (
+				9BFFF50619EDE4E50074C570 /* Theme */,
 				9B2D883419E8753300C3DFD8 /* Categories */,
 				9B82275A19E3BE3000E7C171 /* cfitsio */,
 				9B82277319E3BE3000E7C171 /* ObjCFITSIO */,
@@ -380,6 +384,16 @@
 				9BE1445C19E3B4FA00FB2294 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9BFFF50619EDE4E50074C570 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				9BFFF50319EDE4DD0074C570 /* MDSTheme.h */,
+				9BFFF50419EDE4DD0074C570 /* MDSTheme.m */,
+			);
+			name = Theme;
+			path = MDS9;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -540,6 +554,7 @@
 				9B1EC57F19E5B895009F117A /* MDSFrameView.m in Sources */,
 				9B2D883319E8752200C3DFD8 /* NSArray+Map.m in Sources */,
 				9B82279B19E3BE3000E7C171 /* FITSSpectrum.m in Sources */,
+				9BFFF50519EDE4DD0074C570 /* MDSTheme.m in Sources */,
 				9B82279819E3BE3000E7C171 /* FITSHeaderLine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

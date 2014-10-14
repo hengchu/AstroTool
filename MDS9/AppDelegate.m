@@ -57,6 +57,7 @@
   
   [[NSApplication sharedApplication] setMainMenu:menuController.menu];
   
+  self.window.titleVisibility = NSWindowTitleHidden;
   [self.window makeKeyAndOrderFront:self];
 }
 

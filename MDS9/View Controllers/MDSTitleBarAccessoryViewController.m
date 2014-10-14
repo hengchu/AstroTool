@@ -7,6 +7,7 @@
 //
 
 #import "MDSTitleBarAccessoryViewController.h"
+#import "MDSTheme.h"
 
 @interface MDSTitleBarAccessoryViewController ()
 
@@ -15,8 +16,8 @@
 @implementation MDSTitleBarAccessoryViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
+  [super viewDidLoad];
+
 }
 
 @end
