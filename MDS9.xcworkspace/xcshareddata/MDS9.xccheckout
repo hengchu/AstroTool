@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C43A9D7F-64F7-4530-BA0D-09E7F5BB89D7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MDS9</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>372ECB098FB5D05F5038459CD3CF9EA0FED0EE1A</key>
+		<string>github.com:hengchu/AstroTool.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MDS9.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>372ECB098FB5D05F5038459CD3CF9EA0FED0EE1A</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:hengchu/AstroTool.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>372ECB098FB5D05F5038459CD3CF9EA0FED0EE1A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>372ECB098FB5D05F5038459CD3CF9EA0FED0EE1A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MDS9</string>
+		</dict>
+	</array>
+</dict>
+</plist>

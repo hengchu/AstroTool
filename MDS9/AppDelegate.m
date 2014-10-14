@@ -8,13 +8,16 @@
 
 #import "AppDelegate.h"
 #import "MDSCenterViewController.h"
+#import "MDSRightViewController.h"
 #import "MDSMenuController.h"
 #import "MDSTitleBarAccessoryViewController.h"
 #import <PureLayout/PureLayout.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) MDSCenterViewController *mainVC;
+@property (nonatomic, strong) MDSRightViewController *rightVC;
 
 @end
 
@@ -28,6 +31,8 @@
                                                         defer:NO];
   
   self.mainVC = [[MDSCenterViewController alloc] initWithNibName:@"MDSMainViewController" bundle:[NSBundle mainBundle]];
+  self.rightVC = [[MDSRightViewController alloc] initWithNibName:@"MDSRightViewController" bundle:[NSBundle mainBundle]];
+  self.rightVC.centerVC = self.mainVC;
   
   MDSTitleBarAccessoryViewController *titleVC = [[MDSTitleBarAccessoryViewController alloc] initWithNibName:@"MDSTitleBarAccessoryViewController" bundle:[NSBundle mainBundle]];
   [self.window addTitlebarAccessoryViewController:titleVC];
@@ -37,7 +42,19 @@
   [menuNib instantiateWithOwner:menuController topLevelObjects:nil];
   
   menuController.delegate = self.mainVC;
-  self.window.contentView = self.mainVC.view;
+  
+  NSView *contentView = [[NSView alloc] initWithFrame:self.window.frame];
+  self.window.contentView = contentView;
+  self.mainVC.view.translatesAutoresizingMaskIntoConstraints = NO;
+  self.rightVC.view.translatesAutoresizingMaskIntoConstraints = NO;
+  [contentView addSubview:self.mainVC.view];
+  [contentView addSubview:self.rightVC.view];
+  
+  [self.mainVC.view autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeRight];
+  [self.rightVC.view autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeLeft];
+  [self.rightVC.view autoSetDimension:ALDimensionWidth toSize:300];
+  [self.mainVC.view autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:self.rightVC.view];
+  
   [[NSApplication sharedApplication] setMainMenu:menuController.menu];
   
   [self.window makeKeyAndOrderFront:self];

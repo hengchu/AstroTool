@@ -8,14 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MDSMenuController.h"
+#import "ObjCFITSIO.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface MDSCenterViewController : NSViewController <MDSMenuControllerDelegate>
 
 /**
- *  Delegate call back for @p MDSMenuControllerDelegate.
- *
- *  @param url The url of the file selected.
+ *  Pointer to the currently @p open file.
  */
-- (void)didOpenFileWithURL:(NSURL *)url;
+@property (nonatomic, readonly) FITSFile *currentOpenFile;
 
 @end

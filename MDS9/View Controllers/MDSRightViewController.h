@@ -7,7 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MDSCenterViewController.h"
 
 @interface MDSRightViewController : NSViewController
+
+@property (nonatomic, weak) MDSCenterViewController *centerVC;
+
 
 @end

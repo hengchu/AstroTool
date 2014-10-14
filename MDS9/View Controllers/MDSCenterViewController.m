@@ -13,6 +13,7 @@
 
 @property (weak) IBOutlet NSTextFieldCell *urlLabel;
 @property (weak) IBOutlet MDSFrameView *frameView;
+@property (nonatomic, strong) FITSFile *currentOpenFile;
 
 @end
 
@@ -24,6 +25,16 @@
   [self.urlLabel setStringValue:@"Select a file..."];
 }
 
+#pragma mark - Setters
+
+- (void)setCurrentOpenFile:(FITSFile *)currentOpenFile
+{
+  if (_currentOpenFile) {
+    [_currentOpenFile close];
+  }
+  _currentOpenFile = currentOpenFile;
+}
+
 #pragma mark - Menu Controller delegate methods
 
 - (void)didOpenFileWithURL:(NSURL *)url
@@ -32,8 +43,10 @@
   [self.urlLabel setStringValue:fileName];
   
   FITSFile *fitsFile = [FITSFile FITSFileWithURL:url];
+  
   [fitsFile open];
   [fitsFile syncLoadDataOfHDUAtIndex:0];
+  self.currentOpenFile = fitsFile;
   
   FITSImage *image = [fitsFile HDUAtIndex:0].image;
   

@@ -12,6 +12,7 @@
 @interface FITSImageView : NSImageView
 
 @property (nonatomic, strong) FITSImage *fitsImage;
+
 - (instancetype)initWithFITSImage:(FITSImage *)image;
 
 @end
