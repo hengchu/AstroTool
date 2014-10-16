@@ -15,4 +15,9 @@
   return [NSColor colorWithCalibratedRed:0.95 green:0.95 blue:0.95 alpha:1];
 }
 
++ (NSColor *)stackHeaderButtonTextColor
+{
+  return [NSColor colorWithCalibratedRed:152/255.0 green:165/255.0 blue:178/255.0 alpha:1.0];
+}
+
 @end

@@ -38,9 +38,9 @@
   _currentOpenFile = currentOpenFile;
 }
 
-#pragma mark - Menu Controller delegate methods
+#pragma mark - Public API
 
-- (void)didOpenFileWithURL:(NSURL *)url
+- (void)openFileWithURL:(NSURL *)url
 {
   NSString *fileName = [url lastPathComponent];
   [self.urlLabel setStringValue:fileName];

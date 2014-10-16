@@ -11,11 +11,18 @@
 #import "ObjCFITSIO.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-@interface MDSCenterViewController : NSViewController <MDSMenuControllerDelegate>
+@interface MDSCenterViewController : NSViewController
 
 /**
  *  Pointer to the currently @p open file.
  */
 @property (nonatomic, readonly) FITSFile *currentOpenFile;
+
+/**
+ *  Open a fits file with url
+ *
+ *  @param url url of the file.
+ */
+- (void)openFileWithURL:(NSURL *)url;
 
 @end

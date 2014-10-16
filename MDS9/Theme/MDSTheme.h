@@ -13,4 +13,6 @@
 
 + (NSColor *)panelColor;
 
++ (NSColor *)stackHeaderButtonTextColor;
+
 @end
