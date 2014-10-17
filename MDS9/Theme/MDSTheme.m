@@ -8,6 +8,9 @@
 
 #import "MDSTheme.h"
 
+#define RGB(r, g, b) [NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+#define RGBA(r, g, b, a) [NSColor colorWithCalibratedRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
 @implementation MDSTheme
 
 + (NSColor *)panelColor
@@ -17,7 +20,12 @@
 
 + (NSColor *)stackHeaderButtonTextColor
 {
-  return [NSColor colorWithCalibratedRed:152/255.0 green:165/255.0 blue:178/255.0 alpha:1.0];
+  return RGB(152, 165, 178);
+}
+
++ (NSColor *)separatorColor
+{
+  return RGB(197, 197, 197);
 }
 
 @end

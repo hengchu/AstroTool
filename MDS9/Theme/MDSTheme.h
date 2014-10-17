@@ -15,4 +15,6 @@
 
 + (NSColor *)stackHeaderButtonTextColor;
 
++ (NSColor *)separatorColor;
+
 @end

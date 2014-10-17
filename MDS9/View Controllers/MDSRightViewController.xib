@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MDSRightViewController">
             <connections>
+                <outlet property="headerContainer" destination="HlU-ck-udK" id="1VA-aG-inT"/>
+                <outlet property="headerContainerHeightConstraint" destination="IqD-X9-hmS" id="4Om-3X-oMg"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -14,6 +16,19 @@
         <customView horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="671" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="400" height="673"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="HlU-ck-udK">
+                    <rect key="frame" x="0.0" y="373" width="400" height="300"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="IqD-X9-hmS"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="HlU-ck-udK" secondAttribute="trailing" id="DtK-zM-5on"/>
+                <constraint firstItem="HlU-ck-udK" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Ioy-Uj-VUQ"/>
+                <constraint firstItem="HlU-ck-udK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="vBt-h8-Due"/>
+            </constraints>
             <point key="canvasLocation" x="442" y="364.5"/>
         </customView>
     </objects>

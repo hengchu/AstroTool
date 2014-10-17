@@ -16,6 +16,8 @@
 #import "MDSDisclosureContentViewController.h"
 
 @interface MDSRightViewController ()
+@property (weak) IBOutlet NSLayoutConstraint *headerContainerHeightConstraint;
+@property (weak) IBOutlet NSView *headerContainer;
 @end
 
 @implementation MDSRightViewController
@@ -25,25 +27,36 @@
   [super viewDidLoad];
   // Do view setup here.
   
+  self.view.wantsLayer = YES;
+  self.view.layer.backgroundColor = [MDSTheme panelColor].CGColor;
+  
   MDSHeaderTableViewController *tableVC = [[MDSHeaderTableViewController alloc] init];
   
   [RACObserve(self.centerVC, currentOpenFile) subscribeNext:^(id x) {
     tableVC.openFile = x;
   }];
   
-  self.view.wantsLayer = YES;
-  self.view.layer.backgroundColor = [MDSTheme panelColor].CGColor;
-  
-  
-  NSView *disclosureViewContainer = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 300, 400)];
-  [self.view addSubview:disclosureViewContainer];
+  // This block of code sets up the display of header table view
   MDSDisclosureContentViewController *disclosureVC = [[MDSDisclosureContentViewController alloc] init];
   disclosureVC.disclosedView = tableVC.view;
-  [disclosureViewContainer addSubview:disclosureVC.view];
+  
+  [self.view addSubview:disclosureVC.view];
+  
   [ALView autoSetPriority:600 forConstraints:^{
-    [disclosureVC.view autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeTop];
+    [disclosureVC.view autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
+    [disclosureVC.view autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
+    [disclosureVC.view autoSetDimension:ALDimensionHeight toSize:400];
   }];
   [disclosureVC.view autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
+  
+  NSView *separator = [NSView newAutoLayoutView];
+  [self.view addSubview:separator];
+  [separator autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
+  [separator autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
+  [separator autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:disclosureVC.view];
+  [separator autoSetDimension:ALDimensionHeight toSize:1];
+  separator.wantsLayer = YES;
+  separator.layer.backgroundColor = [MDSTheme separatorColor].CGColor;
 }
 
 

@@ -51,8 +51,6 @@
     
     [self.view addSubview:_disclosedView];
     
-
-    
     [_disclosedView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
     [_disclosedView autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
     [_disclosedView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headerView];

@@ -9,6 +9,7 @@
 #import "MDSMainViewController.h"
 #import "MDSCenterViewController.h"
 #import "MDSRightViewController.h"
+#import "MDSTheme.h"
 #import <PureLayout/PureLayout.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
@@ -38,6 +39,15 @@
   [self.rightVC.view autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeLeft];
   [self.rightVC.view autoSetDimension:ALDimensionWidth toSize:300];
   [self.centerVC.view autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:self.rightVC.view];
+  
+  NSView *verticalSeparator = [NSView newAutoLayoutView];
+  [self.view addSubview:verticalSeparator];
+  [verticalSeparator autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
+  [verticalSeparator autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+  [verticalSeparator autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:self.rightVC.view];
+  [verticalSeparator autoSetDimension:ALDimensionWidth toSize:1];
+  verticalSeparator.wantsLayer = YES;
+  verticalSeparator.layer.backgroundColor = [MDSTheme separatorColor].CGColor;
 }
 
 - (void)didOpenFileWithURL:(NSURL *)url
