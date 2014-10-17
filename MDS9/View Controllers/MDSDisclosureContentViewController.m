@@ -45,14 +45,27 @@
   if (_disclosedView != disclosedView)
   {
     [self.disclosedView removeFromSuperview];
-    _disclosedView = disclosedView;
-    [self.view addSubview:self.disclosedView];
-    self.disclosedView.translatesAutoresizingMaskIntoConstraints = NO;
     
+    _disclosedView = disclosedView;
+    _disclosedView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.view addSubview:_disclosedView];
+    
+
+    
+    [_disclosedView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
+    [_disclosedView autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
+    [_disclosedView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.headerView];
+    [ALView autoSetPriority:600 forConstraints:^{
+      [_disclosedView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    }];
+    
+    /* These are the visual format that Apple official example gives
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_disclosedView]|"
                                                                       options:0
                                                                       metrics:nil
                                                                         views:NSDictionaryOfVariableBindings(_disclosedView)]];
+    
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_headerView][_disclosedView]"
                                                                       options:0
                                                                       metrics:nil
@@ -62,6 +75,7 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_disclosedView]-(0@600)-|"
                                                                       options:0 metrics:nil
                                                                         views:NSDictionaryOfVariableBindings(_disclosedView)]];
+     */
   }
 }
 
