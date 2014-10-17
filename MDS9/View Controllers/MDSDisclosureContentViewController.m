@@ -9,6 +9,7 @@
 #import "MDSDisclosureContentViewController.h"
 #import "MDSDisclosureView.h"
 #import <PureLayout/PureLayout.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 
 @import QuartzCore;
@@ -38,6 +39,12 @@
   
   self.headerView.translatesAutoresizingMaskIntoConstraints = NO;
   [self.view addSubview:self.headerView];
+  
+  [[RACObserve(self, header) filter:^BOOL(id value) {
+    return value != nil;
+  }] subscribeNext:^(id x) {
+    self.headerView.headerText = x;
+  }];
 }
 
 - (void)setDisclosedView:(NSView *)disclosedView

@@ -6,7 +6,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MDSHeaderTableViewController">
             <connections>
-                <outlet property="scrollView" destination="R18-kw-9Xy" id="9Dm-Mh-9jh"/>
                 <outlet property="tableView" destination="98i-2b-uYj" id="Ur6-8E-7LH"/>
                 <outlet property="view" destination="R18-kw-9Xy" id="Qy0-ft-Omd"/>
             </connections>

@@ -10,6 +10,7 @@
 
 @interface MDSDisclosureContentViewController : NSViewController
 
+@property (nonatomic, strong) NSString *header;
 @property (nonatomic, strong) NSView *disclosedView;
 
 - (void)toggleDisclosure:(id)sender;
