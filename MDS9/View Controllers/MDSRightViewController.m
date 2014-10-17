@@ -10,9 +10,10 @@
 #import "NSArray+Map.h"
 #import "MDSHeaderTableRowView.h"
 #import "MDSTheme.h"
-#import "MDSHeaderDisclosureView.h"
+#import "MDSDisclosureView.h"
 #import <PureLayout/PureLayout.h>
 #import "MDSHeaderTableViewController.h"
+#import "MDSDisclosureContentViewController.h"
 
 @interface MDSRightViewController ()
 @end
@@ -24,14 +25,25 @@
   [super viewDidLoad];
   // Do view setup here.
   
-  
   MDSHeaderTableViewController *tableVC = [[MDSHeaderTableViewController alloc] init];
-  [self.view addSubview:tableVC.view];
-  [tableVC.view autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero];
   
   [RACObserve(self.centerVC, currentOpenFile) subscribeNext:^(id x) {
     tableVC.openFile = x;
   }];
+  
+  self.view.wantsLayer = YES;
+  self.view.layer.backgroundColor = [MDSTheme panelColor].CGColor;
+  
+  
+  NSView *disclosureViewContainer = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 300, 400)];
+  [self.view addSubview:disclosureViewContainer];
+  MDSDisclosureContentViewController *disclosureVC = [[MDSDisclosureContentViewController alloc] init];
+  disclosureVC.disclosedView = tableVC.view;
+  [disclosureViewContainer addSubview:disclosureVC.view];
+  [ALView autoSetPriority:600 forConstraints:^{
+    [disclosureVC.view autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeTop];
+  }];
+  [disclosureVC.view autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
 }
 
 

@@ -9,14 +9,13 @@
 #import "MDSHeaderTableViewController.h"
 #import "MDSHeaderTableRowView.h"
 #import "MDSTheme.h"
-#import "MDSHeaderDisclosureView.h"
+#import "MDSDisclosureView.h"
 #import "NSArray+Map.h"
 #import <PureLayout/PureLayout.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 
 @interface MDSHeaderTableViewController () <NSTableViewDataSource, NSTableViewDelegate>
-
 @property (weak) IBOutlet NSTableView *tableView;
 @property (nonatomic, strong) NSArray *headers;
 

@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Hengchu Zhang. All rights reserved.
 //
 
-#import "MDSHeaderDisclosureView.h"
+#import "MDSDisclosureView.h"
 #import "MDSTheme.h"
 #import <PureLayout/PureLayout.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-@interface MDSHeaderDisclosureView() {
+@interface MDSDisclosureView() {
   BOOL _hasUpdatedConstraints;
 }
 
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation MDSHeaderDisclosureView
+@implementation MDSDisclosureView
 
 #pragma mark - Initializers
 

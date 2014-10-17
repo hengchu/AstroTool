@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MDSHeaderDisclosureView : NSView
+@interface MDSDisclosureView : NSView
 
 
 /**
