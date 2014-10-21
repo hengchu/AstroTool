@@ -86,7 +86,6 @@
 
 - (void)toggleDisclosure:(id)sender
 {
-  NSLog(@"Disclosing!");
   if (!_disclosureIsClosed)
   {
     CGFloat distanceFromHeaderToBottom = NSMinY(self.view.bounds) - NSMinY(self.headerView.frame);
