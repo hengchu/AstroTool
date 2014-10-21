@@ -10,9 +10,8 @@
 #import "MDSTheme.h"
 #import "MDSFrameView.h"
 
-@interface MDSCenterViewController ()
+@interface MDSCenterViewController () <NSWindowDelegate>
 
-@property (weak) IBOutlet NSTextFieldCell *urlLabel;
 @property (weak) IBOutlet MDSFrameView *frameView;
 @property (nonatomic, strong) FITSFile *currentOpenFile;
 
@@ -20,12 +19,11 @@
 
 @implementation MDSCenterViewController
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  // Do view setup here.
-  [self.urlLabel setStringValue:@"Select a file..."];
-  self.view.wantsLayer = YES;
-  self.view.layer.backgroundColor = [MDSTheme panelColor].CGColor;
+- (void)viewWillAppear
+{
+  [super viewWillAppear];
+  
+  [self.frameView.window setDelegate:self];
 }
 
 #pragma mark - Setters
@@ -42,9 +40,6 @@
 
 - (void)openFileWithURL:(NSURL *)url
 {
-  NSString *fileName = [url lastPathComponent];
-  [self.urlLabel setStringValue:fileName];
-  
   FITSFile *fitsFile = [FITSFile FITSFileWithURL:url];
   
   [fitsFile open];
@@ -56,6 +51,12 @@
   self.frameView.imageView = [[FITSImageView alloc] initWithFITSImage:image];
   
   [self.frameView zoomImageToFit];
+}
+
+- (BOOL)windowShouldZoom:(NSWindow *)window toFrame:(NSRect)newFrame
+{
+  [self.frameView zoomImageToFit];
+  return YES;
 }
 
 @end

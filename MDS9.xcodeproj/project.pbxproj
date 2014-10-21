@@ -44,6 +44,7 @@
 		9BE1444D19E3B4FA00FB2294 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444C19E3B4FA00FB2294 /* AppDelegate.m */; };
 		9BE1444F19E3B4FA00FB2294 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1444E19E3B4FA00FB2294 /* Images.xcassets */; };
 		9BE1445E19E3B4FA00FB2294 /* MDS9Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1445D19E3B4FA00FB2294 /* MDS9Tests.m */; };
+		9BF5C67C19F6045D00AB7BE9 /* MDSCenteredClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5C67B19F6045D00AB7BE9 /* MDSCenteredClipView.m */; };
 		9BFFF50519EDE4DD0074C570 /* MDSTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFF50419EDE4DD0074C570 /* MDSTheme.m */; };
 /* End PBXBuildFile section */
 
@@ -153,6 +154,8 @@
 		9BE1445719E3B4FA00FB2294 /* MDS9Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MDS9Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE1445C19E3B4FA00FB2294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE1445D19E3B4FA00FB2294 /* MDS9Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDS9Tests.m; sourceTree = "<group>"; };
+		9BF5C67A19F6045D00AB7BE9 /* MDSCenteredClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSCenteredClipView.h; path = "Custom Views/MDSCenteredClipView.h"; sourceTree = "<group>"; };
+		9BF5C67B19F6045D00AB7BE9 /* MDSCenteredClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSCenteredClipView.m; path = "Custom Views/MDSCenteredClipView.m"; sourceTree = "<group>"; };
 		9BFFF50319EDE4DD0074C570 /* MDSTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSTheme.h; path = Theme/MDSTheme.h; sourceTree = "<group>"; };
 		9BFFF50419EDE4DD0074C570 /* MDSTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSTheme.m; path = Theme/MDSTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +206,8 @@
 				9B270D0219ECF4E5004FA723 /* MDSHeaderTableRowView.m */,
 				9B1EC57D19E5B895009F117A /* MDSFrameView.h */,
 				9B1EC57E19E5B895009F117A /* MDSFrameView.m */,
+				9BF5C67A19F6045D00AB7BE9 /* MDSCenteredClipView.h */,
+				9BF5C67B19F6045D00AB7BE9 /* MDSCenteredClipView.m */,
 				9B1EC57A19E5B6F6009F117A /* FITSImageView.h */,
 				9B1EC57B19E5B6F6009F117A /* FITSImageView.m */,
 			);
@@ -591,6 +596,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BF5C67C19F6045D00AB7BE9 /* MDSCenteredClipView.m in Sources */,
 				9B1EC57C19E5B6F6009F117A /* FITSImageView.m in Sources */,
 				9B87CCB219E7A32F001891F9 /* MDSTitleBarAccessoryViewController.m in Sources */,
 				9B87CCB719E7A747001891F9 /* MDSRightViewController.m in Sources */,

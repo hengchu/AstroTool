@@ -7,6 +7,8 @@
 //
 
 #import "MDSFrameView.h"
+#import "MDSTheme.h"
+#import "MDSCenteredClipView.h"
 #import <PureLayout/PureLayout.h>
 
 @interface MDSFrameView() {
@@ -55,6 +57,12 @@
   self.scrollView.allowsMagnification = YES;
   self.scrollView.minMagnification = 0.0001;
   self.scrollView.maxMagnification = 1000;
+  
+  self.scrollView.backgroundColor = [MDSTheme panelColor];
+  
+  MDSCenteredClipView *clipView = [[MDSCenteredClipView alloc] initWithFrame:self.scrollView.bounds];
+  clipView.centersDocumentView = YES;
+  [self.scrollView setContentView:clipView];
 }
 
 #pragma mark - Constraints;
@@ -84,7 +92,6 @@
 - (void)viewDidEndLiveResize
 {
   [super viewDidEndLiveResize];
-  NSLog(@"New size: %@", NSStringFromSize(self.bounds.size));
   [self zoomImageToFit];
 }
 

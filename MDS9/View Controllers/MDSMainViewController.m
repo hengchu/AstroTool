@@ -28,6 +28,10 @@
   
   self.centerVC = [[MDSCenterViewController alloc] initWithNibName:@"MDSCenterViewController" bundle:[NSBundle mainBundle]];
   self.rightVC = [[MDSRightViewController alloc] initWithNibName:@"MDSRightViewController" bundle:[NSBundle mainBundle]];
+  
+  NSView *verticalSeparator = [NSView newAutoLayoutView];
+  [self.view addSubview:verticalSeparator];
+  
   self.rightVC.centerVC = self.centerVC;
   
   self.centerVC.view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -38,10 +42,8 @@
   [self.centerVC.view autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeRight];
   [self.rightVC.view autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeLeft];
   [self.rightVC.view autoSetDimension:ALDimensionWidth toSize:300];
-  [self.centerVC.view autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:self.rightVC.view];
+  [self.centerVC.view autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:verticalSeparator];
   
-  NSView *verticalSeparator = [NSView newAutoLayoutView];
-  [self.view addSubview:verticalSeparator];
   [verticalSeparator autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:0];
   [verticalSeparator autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
   [verticalSeparator autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:self.rightVC.view];
