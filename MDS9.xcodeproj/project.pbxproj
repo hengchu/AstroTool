@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		340950D641EB49AC80BF7D42 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C941D00F434F248C0E1E9AC /* libPods.a */; };
+		9B0E2D2119FD7ACB004D6765 /* MDSIconContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0E2D2019FD7ACB004D6765 /* MDSIconContainerView.m */; };
 		9B1EC57C19E5B6F6009F117A /* FITSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1EC57B19E5B6F6009F117A /* FITSImageView.m */; };
 		9B1EC57F19E5B895009F117A /* MDSFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1EC57E19E5B895009F117A /* MDSFrameView.m */; };
 		9B24FB8C19E5C52600CEDCF6 /* MDSCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B24FB8A19E5C52600CEDCF6 /* MDSCenterViewController.m */; };
@@ -62,6 +63,8 @@
 		0482E64C4FF499DE955F3DDC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		63B58B84DAED815B2096E918 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8C941D00F434F248C0E1E9AC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B0E2D1F19FD7ACB004D6765 /* MDSIconContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSIconContainerView.h; path = "Custom Views/MDSIconContainerView.h"; sourceTree = "<group>"; };
+		9B0E2D2019FD7ACB004D6765 /* MDSIconContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSIconContainerView.m; path = "Custom Views/MDSIconContainerView.m"; sourceTree = "<group>"; };
 		9B1EC57A19E5B6F6009F117A /* FITSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FITSImageView.h; path = "Custom Views/FITSImageView.h"; sourceTree = "<group>"; };
 		9B1EC57B19E5B6F6009F117A /* FITSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FITSImageView.m; path = "Custom Views/FITSImageView.m"; sourceTree = "<group>"; };
 		9B1EC57D19E5B895009F117A /* MDSFrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSFrameView.h; path = "Custom Views/MDSFrameView.h"; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 		9B224A0619E4EA9E0064C188 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				9B0E2D1F19FD7ACB004D6765 /* MDSIconContainerView.h */,
+				9B0E2D2019FD7ACB004D6765 /* MDSIconContainerView.m */,
 				9B48F9E219EE07CA0052DCDB /* MDSDisclosureView.h */,
 				9B48F9E319EE07CA0052DCDB /* MDSDisclosureView.m */,
 				9B270D0119ECF4E5004FA723 /* MDSHeaderTableRowView.h */,
@@ -614,6 +619,7 @@
 				9B82279A19E3BE3000E7C171 /* FITSImage.m in Sources */,
 				9B333E9A19E5D2CF0065D78A /* MDSMenuController.m in Sources */,
 				9B48F9E419EE07CA0052DCDB /* MDSDisclosureView.m in Sources */,
+				9B0E2D2119FD7ACB004D6765 /* MDSIconContainerView.m in Sources */,
 				9B5F9DE819EF8CD9004E29C8 /* MDSDisclosureContentViewController.m in Sources */,
 				9B82279519E3BE3000E7C171 /* FITSFile.m in Sources */,
 				9B1EC57F19E5B895009F117A /* MDSFrameView.m in Sources */,

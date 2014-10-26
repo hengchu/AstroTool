@@ -38,7 +38,7 @@
   
   @weakify(self)
   [self addSectionWithViewController:tableVC
-                               title:@"Test"
+                               title:@"Headers"
                      preferredHeight:300
                           setupBlock:^(NSViewController *vc) {
     @strongify(self)
