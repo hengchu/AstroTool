@@ -110,8 +110,8 @@
 
 - (void)setNeedsUpdateConstraints:(BOOL)needsUpdateConstraints
 {
-  [super setNeedsUpdateConstraints:needsUpdateConstraints];
   _hasUpdatedConstraints = NO;
+  [super setNeedsUpdateConstraints:needsUpdateConstraints];
 }
 
 #pragma mark - Public API
