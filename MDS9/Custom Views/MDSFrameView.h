@@ -25,4 +25,6 @@
  */
 - (void)zoomToScale:(CGFloat)scale;
 
+@property (nonatomic, readonly) NSRect currentVisibleRect;
+
 @end

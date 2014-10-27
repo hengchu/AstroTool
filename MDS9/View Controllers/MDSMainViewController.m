@@ -74,7 +74,9 @@
   [self.rightVC.view autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:iconContainerHorizontalSeparator];
   
   [iconContainerHorizontalSeparator autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
-  [iconContainerHorizontalSeparator autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self.rightVC.view];
+  [iconContainerHorizontalSeparator autoMatchDimension:ALDimensionWidth
+                                           toDimension:ALDimensionWidth
+                                                ofView:self.rightVC.view];
   [iconContainerHorizontalSeparator autoSetDimension:ALDimensionHeight toSize:1];
   [iconContainerHorizontalSeparator autoPinEdge:ALEdgeTop
                                          toEdge:ALEdgeBottom

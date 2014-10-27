@@ -11,9 +11,10 @@
 #import "MDSHeaderTableRowView.h"
 #import "MDSTheme.h"
 #import "MDSDisclosureView.h"
-#import <PureLayout/PureLayout.h>
 #import "MDSHeaderTableViewController.h"
 #import "MDSDisclosureContentViewController.h"
+#import "MDSThumbnailView.h"
+#import <PureLayout/PureLayout.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 
 @interface MDSRightViewController ()
@@ -35,17 +36,21 @@
   self.sideViewControllers = [NSMutableArray array];
   
   MDSHeaderTableViewController *tableVC = [[MDSHeaderTableViewController alloc] init];
+  MDSThumbnailView *thumbnail = [[MDSThumbnailView alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
   
-  @weakify(self)
+  [RACObserve(self.centerVC, currentOpenFile) subscribeNext:^(id x) {
+    FITSFile *file = x;
+    thumbnail.image = [file HDUAtIndex:0].image.image;
+    tableVC.openFile = x;
+  }];
+
+
+  [self addSectionWithView:thumbnail title:@"Thumbnail" preferredHeight:200];
+  
   [self addSectionWithViewController:tableVC
                                title:@"Headers"
                      preferredHeight:300
-                          setupBlock:^(NSViewController *vc) {
-    @strongify(self)
-    [RACObserve(self.centerVC, currentOpenFile) subscribeNext:^(id x) {
-      tableVC.openFile = x;
-    }];
-  }];
+                          setupBlock:nil];
 }
 
 #pragma mark - Public API

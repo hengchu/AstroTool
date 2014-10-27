@@ -10,12 +10,14 @@
 #import "MDSTheme.h"
 #import "MDSCenteredClipView.h"
 #import <PureLayout/PureLayout.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface MDSFrameView() {
   BOOL _hasUpdatedConstraints;
 }
 
 @property (nonatomic, strong) NSScrollView *scrollView;
+@property (nonatomic) NSRect currentVisibleRect;
 
 @end
 
@@ -63,9 +65,29 @@
   MDSCenteredClipView *clipView = [[MDSCenteredClipView alloc] initWithFrame:self.scrollView.bounds];
   clipView.centersDocumentView = YES;
   [self.scrollView setContentView:clipView];
+  [clipView setPostsBoundsChangedNotifications:YES];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChange:) name:NSViewBoundsDidChangeNotification object:clipView];
 }
 
-#pragma mark - Constraints;
+#pragma mark - KVO
+
+- (void)boundsDidChange:(NSNotification *)notification
+{
+  NSRect rect = self.scrollView.documentVisibleRect;
+  
+  CGFloat offsetX = (rect.origin.x > 0) ? 0 : rect.origin.x;
+  CGFloat offsetY = (rect.origin.y > 0) ? 0 : rect.origin.y;
+  
+  rect.size.width  += offsetX * 2;
+  rect.size.height += offsetY * 2;
+  
+  rect.origin.x = (rect.origin.x > 0) ? rect.origin.x : 0;
+  rect.origin.y = (rect.origin.y > 0) ? rect.origin.y : 0;
+  
+  self.currentVisibleRect = rect;
+}
+
+#pragma mark - Constraints
 
 - (BOOL)needsUpdateConstraints
 {
@@ -123,6 +145,13 @@
 - (void)zoomToScale:(CGFloat)scale
 {
   self.scrollView.magnification = scale;
+}
+
+#pragma mark - ARC
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

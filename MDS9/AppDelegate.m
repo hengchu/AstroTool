@@ -27,7 +27,7 @@
   [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 #endif
   
-  self.window = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 600, 800)
+  self.window = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 800, 1280)
                                                     styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask
                                                       backing:NSBackingStoreBuffered
                                                         defer:NO];
