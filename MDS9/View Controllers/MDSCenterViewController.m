@@ -8,7 +8,6 @@
 
 #import "MDSCenterViewController.h"
 #import "MDSTheme.h"
-#import "MDSFrameView.h"
 
 @interface MDSCenterViewController () <NSWindowDelegate>
 

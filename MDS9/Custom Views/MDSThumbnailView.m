@@ -8,12 +8,14 @@
 
 #import "MDSThumbnailView.h"
 #import <PureLayout/PureLayout.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface MDSThumbnailView() {
 
 }
 
 @property (nonatomic, strong) NSImageView* imageView;
+@property (nonatomic, strong) NSView *focusRect;
 
 @end
 
@@ -41,6 +43,33 @@
 {
   self.imageView = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
   self.imageView.imageScaling = NSImageScaleProportionallyDown;
+  [self addSubview:self.imageView];
+  
+  self.focusRect = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
+  self.focusRect.wantsLayer = YES;
+  self.focusRect.layer.borderColor = [NSColor greenColor].CGColor;
+  self.focusRect.layer.borderWidth = 1.0f;
+  [self addSubview:self.focusRect];
+  
+  [RACObserve(self, currentFocusRect) subscribeNext:^(id x) {
+    
+    NSRect visibleRect = [x rectValue];
+    
+    if (!NSIsEmptyRect(visibleRect)) {
+      NSRect imageViewFrame = self.imageView.frame;
+      NSRect focusRectFrame;
+      
+      focusRectFrame.origin.x = visibleRect.origin.x / self.image.size.width * imageViewFrame.size.width;
+      focusRectFrame.origin.y = visibleRect.origin.y / self.image.size.height * imageViewFrame.size.height;
+      focusRectFrame.size.height = visibleRect.size.height / self.image.size.height * imageViewFrame.size.height;
+      focusRectFrame.size.width  = visibleRect.size.width / self.image.size.width * imageViewFrame.size.width;
+
+      focusRectFrame = [self convertRect:focusRectFrame fromView:self.imageView];
+      
+      self.focusRect.frame = focusRectFrame;
+    }
+    
+  }];
 }
 
 #pragma mark - Setter
@@ -59,28 +88,25 @@
 - (void)layout
 {
   [super layout];
+
+  CGSize selfSize = self.bounds.size;
+  CGSize imageSize = (self.image) ? self.image.size : CGSizeMake(100, 100);
   
-  CGFloat HWRatio = self.bounds.size.height / self.bounds.size.width;
-  CGRect frame;
+  CGRect imageViewFrame;
   
-  [self addSubview:self.imageView];
-  
-  if (HWRatio > 1) {
-    frame.size.height = self.bounds.size.height;
-    frame.size.width = frame.size.height / HWRatio;
-    
-    frame.origin.y = 0;
-    frame.origin.x = self.bounds.size.width / 2 - frame.size.width / 2;
+  if (imageSize.width > imageSize.height) {
+    imageViewFrame.size.width = selfSize.width;
+    imageViewFrame.size.height = imageSize.height / imageSize.width * imageViewFrame.size.width;
   } else {
-    frame.size.width = self.bounds.size.width;
-    frame.size.height = frame.size.width * HWRatio;
-    
-    frame.origin.x = 0;
-    frame.origin.y = self.bounds.size.height / 2 - frame.size.height / 2;
+    imageViewFrame.size.height = selfSize.height;
+    imageViewFrame.size.width = imageSize.width / imageSize.height * imageViewFrame.size.height;
   }
   
-  self.imageView.frame = frame;
+  imageViewFrame.origin.x = (selfSize.width - imageViewFrame.size.width) / 2;
+  imageViewFrame.origin.y = (selfSize.height - imageViewFrame.size.height) / 2;
   
+  self.imageView.frame = imageViewFrame;
+
   [super layout];
 }
 

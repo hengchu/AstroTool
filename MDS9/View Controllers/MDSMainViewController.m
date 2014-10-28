@@ -145,6 +145,11 @@
     tableVC.openFile = x;
   }];
   
+  [RACObserve(self.centerVC.frameView, currentVisibleRect) subscribeNext:^(id x) {
+    NSRect rect = [x rectValue];
+    thumbnail.currentFocusRect = rect;
+  }];
+  
   MDSRightViewController *rightHeaderVC = [[MDSRightViewController alloc] initWithNibName:@"MDSRightViewController" bundle:[NSBundle mainBundle]];
   [rightHeaderVC addSectionWithViewController:tableVC title:@"Headers" preferredHeight:200 setupBlock:nil];
   

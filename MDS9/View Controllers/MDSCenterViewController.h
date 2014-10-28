@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "MDSMenuController.h"
 #import "ObjCFITSIO.h"
+#import "MDSFrameView.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface MDSCenterViewController : NSViewController
@@ -24,5 +25,7 @@
  *  @param url url of the file.
  */
 - (void)openFileWithURL:(NSURL *)url;
+
+@property (readonly) MDSFrameView *frameView;
 
 @end
