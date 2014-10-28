@@ -111,26 +111,29 @@
 {
   [super viewDidLoad];
   
+  [self createIconContainer];
   [self createRightVCContainer];
   [self createCenterVC];
   [self createSeparators];
-  [self createIconContainer];
   [self createInterViewConstraints];
   self.iconToRightVC = [NSMutableDictionary dictionary];
   
-  NSButton *button = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
+  NSButton *button = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 24, 24)];
   [button setImage:[NSImage imageNamed:@"HeaderIconNormal"]];
   [button setAlternateImage:[NSImage imageNamed:@"HeaderIconHighlighted"]];
+  [button setButtonType:NSMomentaryChangeButton];
   button.bordered = NO;
   
   NSButton *button1 = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
-  [button1 setImage:[NSImage imageNamed:@"HeaderIconNormal"]];
-  [button1 setAlternateImage:[NSImage imageNamed:@"HeaderIconHighlighted"]];
+  [button1 setImage:[NSImage imageNamed:@"FocusIconNormal"]];
+  [button1 setAlternateImage:[NSImage imageNamed:@"FocusIconHighlighted"]];
+  [button1 setButtonType:NSMomentaryChangeButton];
   button1.bordered = NO;
   
   NSButton *button2 = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
   [button2 setImage:[NSImage imageNamed:@"HeaderIconNormal"]];
   [button2 setAlternateImage:[NSImage imageNamed:@"HeaderIconHighlighted"]];
+  [button2 setButtonType:NSMomentaryChangeButton];
   button2.bordered = NO;
   
   MDSHeaderTableViewController *tableVC = [[MDSHeaderTableViewController alloc] init];
@@ -147,6 +150,9 @@
   
   MDSRightViewController *rightThumbnailVC = [[MDSRightViewController alloc] initWithNibName:@"MDSRightViewController" bundle:[NSBundle mainBundle]];
   [rightThumbnailVC addSectionWithView:thumbnail title:@"Thumbnail" preferredHeight:200];
+  
+  [self addIcon:button withAssociatedRightVC:rightHeaderVC];
+  [self addIcon:button1 withAssociatedRightVC:rightThumbnailVC];
 }
 
 #pragma mark - Helpers
@@ -162,15 +168,22 @@
   NSValue *iconKey = [NSValue valueWithNonretainedObject:icon];
   
   [self.iconToRightVC setObject:rightVC forKey:iconKey];
-  
-  icon.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-    for (id key in self.iconToRightVC) {
+  icon.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(NSButton *input) {
+    for (NSValue *key in self.iconToRightVC) {
+      NSButton *keyButton = [key nonretainedObjectValue];
+      keyButton.highlighted = NO;
       MDSRightViewController *vc = self.iconToRightVC[key];
       vc.view.hidden = YES;
     }
     rightVC.view.hidden = NO;
+    [self performSelector:@selector(highLightButton:) withObject:input afterDelay:0.0f];
     return [RACSignal empty];
   }];
+}
+
+- (void)highLightButton:(NSButton *)button
+{
+  button.highlighted = YES;
 }
 
 #pragma mark - MDSMenuControllerDelegate

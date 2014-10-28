@@ -50,6 +50,10 @@
   self.iconContainer = [NSView newAutoLayoutView];
   self.iconContainer.wantsLayer = YES;
   self.iconContainer.layer.backgroundColor = [NSColor clearColor].CGColor;
+  [self.iconContainer setContentCompressionResistancePriority:NSLayoutPriorityDefaultHigh
+                                               forOrientation:NSLayoutConstraintOrientationHorizontal];
+  [self.iconContainer setContentCompressionResistancePriority:NSLayoutPriorityDefaultHigh
+                                               forOrientation:NSLayoutConstraintOrientationVertical];
   [self addSubview:self.iconContainer];
 }
 
@@ -73,7 +77,7 @@
       
       NSUInteger idx = [self.icons indexOfObject:icon];
       
-      if (self.icons.count > 1) {
+      if (self.icons.count > 2) {
         
         if (idx == 0) {
           [icon autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeRight];
@@ -89,9 +93,21 @@
           [icon autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:nView withOffset:-H_MARGIN];
         }
         
-      } else {
+      } else if (self.icons.count == 1) {
         
-        [icon autoCenterInSuperview];
+        [icon autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero];
+        
+      } else { // self.icons.count == 2
+        
+        NSAssert(self.icons.count == 2, @"Impossible number of icons!");
+        
+        if (idx == 0) {
+          [icon autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeRight];
+          NSView *nIcon = self.icons[idx+1];
+          [icon autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:nIcon withOffset:-H_MARGIN];
+        } else {
+          [icon autoPinEdgesToSuperviewEdgesWithInsets:NSEdgeInsetsZero excludingEdge:ALEdgeLeft];
+        }
         
       }
       
@@ -102,6 +118,8 @@
     [self addSubview:self.iconContainer];
     
     [self.iconContainer autoCenterInSuperview];
+    
+    [self.iconContainer layoutSubtreeIfNeeded];
     
     _hasUpdatedConstraints = YES;
   }
