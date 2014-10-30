@@ -26,6 +26,6 @@
  */
 - (void)openFileWithURL:(NSURL *)url;
 
-@property (readonly) MDSFrameView *frameView;
+@property (weak, readonly) MDSFrameView *frameView;
 
 @end

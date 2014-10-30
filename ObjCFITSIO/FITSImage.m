@@ -22,6 +22,10 @@ static NSInteger queueCount = 0;
 @interface FITSImage () {
 	dispatch_queue_t _processingQueue;
 }
+
+@property (nonatomic) double *rawIntensity;
+@property (nonatomic) double *currentApparentIntensity;
+
 @end
 
 @implementation FITSImage
@@ -32,6 +36,8 @@ static NSInteger queueCount = 0;
 	if (self) {
 		_size = s;
 		_type = t;
+    _rawIntensity = malloc(sizeof(double) * _size.nx * _size.ny);
+    _currentApparentIntensity = malloc(sizeof(double) * _size.nx * _size.ny);
 	}
 	return self;
 }
@@ -100,15 +106,19 @@ static NSInteger queueCount = 0;
 		[self set2DImageData:rawImageData];
 	}
 	else if ([self is1D]) {
+    memcpy(self.rawIntensity, rawImageData, sizeof(double) * _size.nx * _size.ny);
 		[self set1DImageData:rawImageData];
 	}
 }
+
 
 - (void)set2DImageData:(double *)imageArray
 {
 	NSInteger width = (NSInteger)_size.nx;
 	NSInteger height = (NSInteger)_size.ny;
 
+  memcpy(self.currentApparentIntensity, self.rawIntensity, sizeof(double) * width * height);
+  
 	bitmapRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
 														pixelsWide:width
 														pixelsHigh:height
@@ -296,6 +306,12 @@ static NSInteger queueCount = 0;
 			completionBlock(newImage);
 		});
 	});
+}
+
+- (void)dealloc
+{
+  if (self.rawIntensity) free(self.rawIntensity);
+  if (self.currentApparentIntensity) free(self.currentApparentIntensity);
 }
 
 @end

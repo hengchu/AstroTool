@@ -42,6 +42,7 @@
 		9B87CCB319E7A32F001891F9 /* MDSTitleBarAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B87CCB119E7A32F001891F9 /* MDSTitleBarAccessoryViewController.xib */; };
 		9B87CCB719E7A747001891F9 /* MDSRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B87CCB519E7A747001891F9 /* MDSRightViewController.m */; };
 		9B87CCB819E7A747001891F9 /* MDSRightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B87CCB619E7A747001891F9 /* MDSRightViewController.xib */; };
+		9BC3698D1A007F2B00B63FF8 /* MDSTransformationFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BC3698B1A007F2B00B63FF8 /* MDSTransformationFunctions.c */; };
 		9BE1444A19E3B4FA00FB2294 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444919E3B4FA00FB2294 /* main.m */; };
 		9BE1444D19E3B4FA00FB2294 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444C19E3B4FA00FB2294 /* AppDelegate.m */; };
 		9BE1444F19E3B4FA00FB2294 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1444E19E3B4FA00FB2294 /* Images.xcassets */; };
@@ -151,6 +152,8 @@
 		9B87CCB419E7A747001891F9 /* MDSRightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSRightViewController.h; path = "View Controllers/MDSRightViewController.h"; sourceTree = "<group>"; };
 		9B87CCB519E7A747001891F9 /* MDSRightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSRightViewController.m; path = "View Controllers/MDSRightViewController.m"; sourceTree = "<group>"; };
 		9B87CCB619E7A747001891F9 /* MDSRightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MDSRightViewController.xib; path = "View Controllers/MDSRightViewController.xib"; sourceTree = "<group>"; };
+		9BC3698B1A007F2B00B63FF8 /* MDSTransformationFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MDSTransformationFunctions.c; path = "MDS9/Transformation Functions/MDSTransformationFunctions.c"; sourceTree = "<group>"; };
+		9BC3698C1A007F2B00B63FF8 /* MDSTransformationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSTransformationFunctions.h; path = "MDS9/Transformation Functions/MDSTransformationFunctions.h"; sourceTree = "<group>"; };
 		9BE1444419E3B4FA00FB2294 /* MDS9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDS9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE1444819E3B4FA00FB2294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE1444919E3B4FA00FB2294 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -389,9 +392,19 @@
 			name = "Right View";
 			sourceTree = "<group>";
 		};
+		9BC3698E1A007F4700B63FF8 /* Transformation Functions */ = {
+			isa = PBXGroup;
+			children = (
+				9BC3698B1A007F2B00B63FF8 /* MDSTransformationFunctions.c */,
+				9BC3698C1A007F2B00B63FF8 /* MDSTransformationFunctions.h */,
+			);
+			name = "Transformation Functions";
+			sourceTree = "<group>";
+		};
 		9BE1443B19E3B4FA00FB2294 = {
 			isa = PBXGroup;
 			children = (
+				9BC3698E1A007F4700B63FF8 /* Transformation Functions */,
 				9BFFF50619EDE4E50074C570 /* Theme */,
 				9B2D883419E8753300C3DFD8 /* Categories */,
 				9B82275A19E3BE3000E7C171 /* cfitsio */,
@@ -620,6 +633,7 @@
 				9B82279919E3BE3000E7C171 /* FITSImage+Scaling.m in Sources */,
 				9BE1444A19E3B4FA00FB2294 /* main.m in Sources */,
 				9B82279619E3BE3000E7C171 /* FITSHDU.m in Sources */,
+				9BC3698D1A007F2B00B63FF8 /* MDSTransformationFunctions.c in Sources */,
 				9B5F9DE119EF867E004E29C8 /* MDSHeaderTableViewController.m in Sources */,
 				9B82279A19E3BE3000E7C171 /* FITSImage.m in Sources */,
 				9B333E9A19E5D2CF0065D78A /* MDSMenuController.m in Sources */,

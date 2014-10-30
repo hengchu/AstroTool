@@ -56,20 +56,27 @@
     NSRect visibleRect = [x rectValue];
     
     if (!NSIsEmptyRect(visibleRect)) {
-      NSRect imageViewFrame = self.imageView.frame;
-      NSRect focusRectFrame;
       
-      focusRectFrame.origin.x = visibleRect.origin.x / self.image.size.width * imageViewFrame.size.width;
-      focusRectFrame.origin.y = visibleRect.origin.y / self.image.size.height * imageViewFrame.size.height;
-      focusRectFrame.size.height = visibleRect.size.height / self.image.size.height * imageViewFrame.size.height;
-      focusRectFrame.size.width  = visibleRect.size.width / self.image.size.width * imageViewFrame.size.width;
-
-      focusRectFrame = [self convertRect:focusRectFrame fromView:self.imageView];
-      
-      self.focusRect.frame = focusRectFrame;
+      self.focusRect.frame = [self visibleRectToFocusRectFrame:visibleRect];
     }
     
   }];
+}
+
+#pragma mark - Helper
+
+- (NSRect)visibleRectToFocusRectFrame:(NSRect)visibleRect
+{
+  NSRect imageViewFrame = self.imageView.frame;
+  NSRect focusRectFrame;
+  
+  focusRectFrame.origin.x = visibleRect.origin.x / self.image.size.width * imageViewFrame.size.width;
+  focusRectFrame.origin.y = visibleRect.origin.y / self.image.size.height * imageViewFrame.size.height;
+  focusRectFrame.size.height = visibleRect.size.height / self.image.size.height * imageViewFrame.size.height;
+  focusRectFrame.size.width  = visibleRect.size.width / self.image.size.width * imageViewFrame.size.width;
+  
+  focusRectFrame = [self convertRect:focusRectFrame fromView:self.imageView];
+  return focusRectFrame;
 }
 
 #pragma mark - Setter
