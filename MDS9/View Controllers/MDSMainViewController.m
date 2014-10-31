@@ -13,6 +13,7 @@
 #import "MDSIconContainerView.h"
 #import "MDSHeaderTableViewController.h"
 #import "MDSThumbnailView.h"
+#import "MDSScalingViewController.h"
 #import <PureLayout/PureLayout.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
@@ -118,24 +119,18 @@
   [self createInterViewConstraints];
   self.iconToRightVC = [NSMutableDictionary dictionary];
   
-  NSButton *button = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 24, 24)];
-  [button setImage:[NSImage imageNamed:@"HeaderIconNormal"]];
-  [button setAlternateImage:[NSImage imageNamed:@"HeaderIconHighlighted"]];
-  [button setButtonType:NSMomentaryChangeButton];
-  button.bordered = NO;
+  NSButton *headerIcon = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
+  [headerIcon setImage:[NSImage imageNamed:@"HeaderIconNormal"]];
+  [headerIcon setAlternateImage:[NSImage imageNamed:@"HeaderIconHighlighted"]];
+  [headerIcon setButtonType:NSMomentaryChangeButton];
+  headerIcon.bordered = NO;
   
-  NSButton *button1 = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
-  [button1 setImage:[NSImage imageNamed:@"FocusIconNormal"]];
-  [button1 setAlternateImage:[NSImage imageNamed:@"FocusIconHighlighted"]];
-  [button1 setButtonType:NSMomentaryChangeButton];
-  button1.bordered = NO;
-  
-  NSButton *button2 = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
-  [button2 setImage:[NSImage imageNamed:@"HeaderIconNormal"]];
-  [button2 setAlternateImage:[NSImage imageNamed:@"HeaderIconHighlighted"]];
-  [button2 setButtonType:NSMomentaryChangeButton];
-  button2.bordered = NO;
-  
+  NSButton *focusIcon = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
+  [focusIcon setImage:[NSImage imageNamed:@"FocusIconNormal"]];
+  [focusIcon setAlternateImage:[NSImage imageNamed:@"FocusIconHighlighted"]];
+  [focusIcon setButtonType:NSMomentaryChangeButton];
+  focusIcon.bordered = NO;
+    
   MDSHeaderTableViewController *tableVC = [[MDSHeaderTableViewController alloc] init];
   MDSThumbnailView *thumbnail = [[MDSThumbnailView alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
   
@@ -150,14 +145,40 @@
     thumbnail.currentFocusRect = rect;
   }];
   
-  MDSRightViewController *rightHeaderVC = [[MDSRightViewController alloc] initWithNibName:@"MDSRightViewController" bundle:[NSBundle mainBundle]];
-  [rightHeaderVC addSectionWithViewController:tableVC title:@"Headers" preferredHeight:200 setupBlock:nil];
+  MDSRightViewController *rightHeaderVC = [[MDSRightViewController alloc] initWithNibName:@"MDSRightViewController"
+                                                                                   bundle:[NSBundle mainBundle]];
+  [rightHeaderVC addSectionWithViewController:tableVC
+                                        title:@"Headers"
+                              preferredHeight:200
+                                   setupBlock:nil];
   
-  MDSRightViewController *rightThumbnailVC = [[MDSRightViewController alloc] initWithNibName:@"MDSRightViewController" bundle:[NSBundle mainBundle]];
-  [rightThumbnailVC addSectionWithView:thumbnail title:@"Thumbnail" preferredHeight:200];
+  MDSRightViewController *rightThumbnailVC = [[MDSRightViewController alloc] initWithNibName:@"MDSRightViewController"
+                                                                                      bundle:[NSBundle mainBundle]];
+  MDSScalingViewController *scalingVC = [[MDSScalingViewController alloc] initWithNibName:@"MDSScalingViewController"
+                                                                                   bundle:[NSBundle mainBundle]];
   
-  [self addIcon:button withAssociatedRightVC:rightHeaderVC];
-  [self addIcon:button1 withAssociatedRightVC:rightThumbnailVC];
+  [[RACSignal combineLatest:@[RACObserve(scalingVC, bias), RACObserve(scalingVC, contrast)]
+                    reduce:^(NSNumber *bias, NSNumber *contrast)
+  {
+    return RACTuplePack(bias, contrast);
+  }] subscribeNext:^(id x) {
+    RACTupleUnpack(NSNumber *bias, NSNumber *contrast) = x;
+    if (self.centerVC.frameView.imageView.fitsImage) {
+      [self.centerVC.frameView.imageView.fitsImage applyAsinhScaleWithBias:bias.doubleValue
+                                                                contrast:contrast.doubleValue];
+    }
+  }];
+  
+  [rightThumbnailVC addSectionWithView:thumbnail
+                                 title:@"Thumbnail"
+                       preferredHeight:200];
+  [rightThumbnailVC addSectionWithViewController:scalingVC
+                                           title:@"Scale"
+                                 preferredHeight:150
+                                      setupBlock:nil];
+  
+  [self addIcon:headerIcon withAssociatedRightVC:rightHeaderVC];
+  [self addIcon:focusIcon withAssociatedRightVC:rightThumbnailVC];
 }
 
 #pragma mark - Helpers
@@ -184,6 +205,8 @@
     [self performSelector:@selector(highLightButton:) withObject:input afterDelay:0.0f];
     return [RACSignal empty];
   }];
+  
+  rightVC.view.hidden = YES;
 }
 
 - (void)highLightButton:(NSButton *)button

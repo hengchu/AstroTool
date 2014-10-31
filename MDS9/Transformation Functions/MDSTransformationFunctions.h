@@ -34,4 +34,15 @@ void asinh_warp(double *output, double *input, double vmin, double vmax,
 
 void linear_mult(double *output, double *input, double scalar, int count);
 
+/**
+ *  Use this function to figure out percentiles
+ *
+ *  @param list  list of doubles
+ *  @param k     zero-based index of number to find
+ *  @param count length of @p list
+ *
+ *  @return kth largest value in @p list.
+ */
+double quickSelect(double *list, int k, int count);
+
 #endif /* defined(__MDS9__MDSTransformationFunctions__) */

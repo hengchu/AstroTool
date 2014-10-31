@@ -7,6 +7,7 @@
 //
 
 #import "FITSImageView.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @implementation FITSImageView
 
@@ -16,7 +17,9 @@
   if (self = [super initWithFrame:NSMakeRect(0, 0, fitsImage.size.width, fitsImage.size.height)])
   {
     _fitsImage = image;
-    self.image = fitsImage;
+    [RACObserve(_fitsImage, loaded) subscribeNext:^(id x) {
+      self.image = _fitsImage.image;
+    }];
   }
   return self;
 }

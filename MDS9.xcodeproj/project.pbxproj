@@ -43,6 +43,8 @@
 		9B87CCB719E7A747001891F9 /* MDSRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B87CCB519E7A747001891F9 /* MDSRightViewController.m */; };
 		9B87CCB819E7A747001891F9 /* MDSRightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B87CCB619E7A747001891F9 /* MDSRightViewController.xib */; };
 		9BC3698D1A007F2B00B63FF8 /* MDSTransformationFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BC3698B1A007F2B00B63FF8 /* MDSTransformationFunctions.c */; };
+		9BC369921A031A9800B63FF8 /* MDSScalingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC369901A031A9800B63FF8 /* MDSScalingViewController.m */; };
+		9BC369931A031A9800B63FF8 /* MDSScalingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC369911A031A9800B63FF8 /* MDSScalingViewController.xib */; };
 		9BE1444A19E3B4FA00FB2294 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444919E3B4FA00FB2294 /* main.m */; };
 		9BE1444D19E3B4FA00FB2294 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444C19E3B4FA00FB2294 /* AppDelegate.m */; };
 		9BE1444F19E3B4FA00FB2294 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1444E19E3B4FA00FB2294 /* Images.xcassets */; };
@@ -154,6 +156,9 @@
 		9B87CCB619E7A747001891F9 /* MDSRightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MDSRightViewController.xib; path = "View Controllers/MDSRightViewController.xib"; sourceTree = "<group>"; };
 		9BC3698B1A007F2B00B63FF8 /* MDSTransformationFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MDSTransformationFunctions.c; path = "MDS9/Transformation Functions/MDSTransformationFunctions.c"; sourceTree = "<group>"; };
 		9BC3698C1A007F2B00B63FF8 /* MDSTransformationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSTransformationFunctions.h; path = "MDS9/Transformation Functions/MDSTransformationFunctions.h"; sourceTree = "<group>"; };
+		9BC3698F1A031A9800B63FF8 /* MDSScalingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSScalingViewController.h; path = "View Controllers/MDSScalingViewController.h"; sourceTree = "<group>"; };
+		9BC369901A031A9800B63FF8 /* MDSScalingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSScalingViewController.m; path = "View Controllers/MDSScalingViewController.m"; sourceTree = "<group>"; };
+		9BC369911A031A9800B63FF8 /* MDSScalingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MDSScalingViewController.xib; path = "View Controllers/MDSScalingViewController.xib"; sourceTree = "<group>"; };
 		9BE1444419E3B4FA00FB2294 /* MDS9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDS9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE1444819E3B4FA00FB2294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE1444919E3B4FA00FB2294 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -230,6 +235,9 @@
 		9B24FB8E19E5C52B00CEDCF6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9BC3698F1A031A9800B63FF8 /* MDSScalingViewController.h */,
+				9BC369901A031A9800B63FF8 /* MDSScalingViewController.m */,
+				9BC369911A031A9800B63FF8 /* MDSScalingViewController.xib */,
 				9B5F9DEA19EF8CDC004E29C8 /* Disclosure Content View Controller */,
 				9B5F9DE319EF8715004E29C8 /* Header Table View Controller */,
 				9B5F9DE419EF8C3E004E29C8 /* Main View Controller */,
@@ -564,6 +572,7 @@
 				9B87CCB819E7A747001891F9 /* MDSRightViewController.xib in Resources */,
 				9B333EA119E5D3D90065D78A /* MDSMenu.xib in Resources */,
 				9B5F9DDD19EF8467004E29C8 /* MDSMainViewController.xib in Resources */,
+				9BC369931A031A9800B63FF8 /* MDSScalingViewController.xib in Resources */,
 				9B82279D19E3BE3000E7C171 /* ObjCFITSIO-Info.plist in Resources */,
 				9BE1444F19E3B4FA00FB2294 /* Images.xcassets in Resources */,
 				9B24FB8D19E5C52600CEDCF6 /* MDSCenterViewController.xib in Resources */,
@@ -628,6 +637,7 @@
 				9B82279719E3BE3000E7C171 /* FITSHeader.m in Sources */,
 				9B82279C19E3BE3000E7C171 /* NSArray+NumericalOperations.m in Sources */,
 				9B82279E19E3BE3000E7C171 /* DebugLog.m in Sources */,
+				9BC369921A031A9800B63FF8 /* MDSScalingViewController.m in Sources */,
 				9BE1444D19E3B4FA00FB2294 /* AppDelegate.m in Sources */,
 				9B82279419E3BE3000E7C171 /* FITSConstants.m in Sources */,
 				9B82279919E3BE3000E7C171 /* FITSImage+Scaling.m in Sources */,

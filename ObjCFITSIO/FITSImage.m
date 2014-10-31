@@ -16,6 +16,7 @@
 #import "FITSConstants.h"
 
 #import "DebugLog.h"
+#import "MDSTransformationFunctions.h"
 
 static NSInteger queueCount = 0;
 
@@ -103,62 +104,65 @@ static NSInteger queueCount = 0;
 - (void)setImageData:(double *)rawImageData
 {	
 	if ([self is2D]) {
+    memcpy(self.rawIntensity, rawImageData, sizeof(double) * _size.nx * _size.ny);
 		[self set2DImageData:rawImageData];
 	}
 	else if ([self is1D]) {
-    memcpy(self.rawIntensity, rawImageData, sizeof(double) * _size.nx * _size.ny);
 		[self set1DImageData:rawImageData];
 	}
 }
 
-
 - (void)set2DImageData:(double *)imageArray
+{
+  [self set2DImageData:imageArray withZScale:YES];
+}
+
+- (void)set2DImageData:(double *)imageArray withZScale:(BOOL)applyZScale
 {
 	NSInteger width = (NSInteger)_size.nx;
 	NSInteger height = (NSInteger)_size.ny;
-
-  memcpy(self.currentApparentIntensity, self.rawIntensity, sizeof(double) * width * height);
   
 	bitmapRep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
-														pixelsWide:width
-														pixelsHigh:height
-													 bitsPerSample:8
-												   samplesPerPixel:1
-														  hasAlpha:NO
-														  isPlanar:NO
-													colorSpaceName:NSCalibratedWhiteColorSpace
-													   bytesPerRow:0
-													  bitsPerPixel:8];
+                                                      pixelsWide:width
+                                                      pixelsHigh:height
+                                                   bitsPerSample:8
+                                                 samplesPerPixel:1
+                                                        hasAlpha:NO
+                                                        isPlanar:NO
+                                                  colorSpaceName:NSCalibratedWhiteColorSpace
+                                                     bytesPerRow:0
+                                                    bitsPerPixel:8];
 
-	NSDictionary *coefficients = [self zscaleCoefficientsForImage:imageArray];
-	double z1 = [[coefficients objectForKey:@"z1"] doubleValue];
-	double z2 = [[coefficients objectForKey:@"z2"] doubleValue];
-		
 	NSInteger rowBytes = [bitmapRep bytesPerRow];
 	unsigned char *pix = [bitmapRep bitmapData];
-	
-	for (NSInteger i = 0; i < height; ++i) {
-		for (NSInteger j = 0; j < width; ++j) {
-			double v = imageArray[(height - i - 1) * width + j];
-			if (v < z1) {
-				v = 0.0;
-			}
-			else if (v > z2) {
-				v = 255.0;
-			}
-			else {
-				v = floor(255.0 * (v - z1) / (1.0 * (z2 - z1)));
-			}
-			pix[i * rowBytes + j] = (unsigned char)v;
-//			pix[i * rowBytes + j] = (unsigned char)(imageArray[i * width + j]);
-		}
-	}
+  
+  NSDictionary *coefficients = [self zscaleCoefficientsForImage:imageArray];
+  double z1 = [[coefficients objectForKey:@"z1"] doubleValue];
+  double z2 = [[coefficients objectForKey:@"z2"] doubleValue];
+  
+  for (NSInteger i = 0; i < height; ++i) {
+    for (NSInteger j = 0; j < width; ++j) {
+      double v = imageArray[(height - i - 1) * width + j];
+      if (applyZScale) {
+        if (v < z1) {
+          v = 0.0;
+        }
+        else if (v > z2) {
+          v = 255.0;
+        }
+        else {
+          v = floor(255.0 * (v - z1) / (1.0 * (z2 - z1)));
+        }
+      }
+      pix[i * rowBytes + j] = (unsigned char)v;
+    }
+  }
 	
 	if (bitmapRep) {
 		image = [[NSImage alloc] initWithSize:NSMakeSize(_size.nx, _size.ny)];
 		[image addRepresentation:bitmapRep];
 		self.loaded = YES;
-	}	
+	}
 }
 
 - (void)set1DImageData:(double *)rawImageData
@@ -306,6 +310,103 @@ static NSInteger queueCount = 0;
 			completionBlock(newImage);
 		});
 	});
+}
+
+- (void)applyLinearScaleWithBias:(double)bias contrast:(double)contrast
+{
+  int count = _size.nx * _size.ny;
+
+  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  
+  double vmin = [coefficients[@"z1"] doubleValue];
+  double vmax = [coefficients[@"z2"] doubleValue];
+  
+  linear_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, count);
+  linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
+  
+  [self set2DImageData:self.currentApparentIntensity withZScale:NO];
+}
+
+- (void)applySqrtScaleWithBias:(double)bias contrast:(double)contrast
+{
+  int count = _size.nx * _size.ny;
+
+  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  
+  double vmin = [coefficients[@"z1"] doubleValue];
+  double vmax = [coefficients[@"z2"] doubleValue];
+  
+  sqrt_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, count);
+  linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
+  
+  [self set2DImageData:self.currentApparentIntensity withZScale:NO];
+}
+
+- (void)applySquaredScaleWithBias:(double)bias contrast:(double)contrast
+{
+  int count = _size.nx * _size.ny;
+
+  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  
+  double vmin = [coefficients[@"z1"] doubleValue];
+  double vmax = [coefficients[@"z2"] doubleValue];
+  
+  squared_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, count);
+  linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
+  
+  [self set2DImageData:self.currentApparentIntensity withZScale:NO];
+}
+
+- (void)applyAsinhScaleWithBias:(double)bias contrast:(double)contrast
+{
+  int count = _size.nx * _size.ny;
+
+  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  
+  double vmin = [coefficients[@"z1"] doubleValue];
+  double vmax = [coefficients[@"z2"] doubleValue];
+  
+//  for (int i = 0; i < count; i++) {
+//    NSLog(@"%f", self.currentApparentIntensity[i]);
+//  }
+//  
+  asinh_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, count);
+  
+  linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
+  
+  
+  [self set2DImageData:self.currentApparentIntensity withZScale:NO];
+}
+
+- (void)applyLogScaleWithBias:(double)bias contrast:(double)contrast exponent:(double)exp
+{
+  
+  int count = _size.nx * _size.ny;
+  
+  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  
+  double vmin = [coefficients[@"z1"] doubleValue];
+  double vmax = [coefficients[@"z2"] doubleValue];
+  
+  log_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, exp, count);
+  linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
+  
+  [self set2DImageData:self.currentApparentIntensity withZScale:NO];
+}
+
+- (void)applyPowerScaleWithBias:(double)bias contrast:(double)contrast exponent:(double)exp
+{
+  int count = _size.nx * _size.ny;
+
+  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  
+  double vmin = [coefficients[@"z1"] doubleValue];
+  double vmax = [coefficients[@"z2"] doubleValue];
+  
+  pow_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, exp, count);
+  linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
+  
+  [self set2DImageData:self.currentApparentIntensity withZScale:NO];
 }
 
 - (void)dealloc

@@ -13,7 +13,7 @@
 #import "MDSTheme.h"
 #import <PureLayout/PureLayout.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import "Transformation Functions/MDSTransformationFunctions.h"
+#import "MDSTransformationFunctions.h"
 
 @interface AppDelegate ()
 
@@ -44,7 +44,6 @@
   self.window.contentViewController = mainVC;
   self.window.titleVisibility = NSWindowTitleHidden;
   [self.window makeKeyAndOrderFront:self];
-  
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

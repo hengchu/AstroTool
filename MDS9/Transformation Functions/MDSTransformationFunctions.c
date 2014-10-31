@@ -142,3 +142,56 @@ void linear_mult(double *output, double *input, double scalar, int count)
 {
   vDSP_vsmulD(input, 1, &scalar, output, 1, count);
 }
+
+void swap_items(double *list, int i, int j)
+{
+  double tmp = list[i];
+  list[i] = list[j];
+  list[j] = tmp;
+}
+
+int partition(double *list, int startI, int endI, int pivotI)
+{
+  double pivotValue = list[pivotI];
+  list[pivotI] = list[startI];
+  list[startI] = pivotValue;
+  
+  int storeI = startI + 1;
+  while (storeI < endI && list[storeI] <= pivotValue) ++storeI;
+  
+  for (int i = storeI + 1; i < endI; i++) {
+    if (list[i] <= pivotValue) {
+      swap_items(list, i, storeI);
+      ++storeI;
+    }
+  }
+  
+  int newPivotI = storeI - 1;
+  list[startI] = list[newPivotI];
+  list[newPivotI] = pivotValue;
+  return newPivotI;
+}
+
+double _quickSelect(double *list, int k, int startI, int endI)
+{
+  while (true) {
+    int pivotI = (startI + endI) / 2;
+    int splitI = partition(list, startI, endI, pivotI);
+    if (k < splitI)
+      endI = splitI;
+    else if (k > splitI)
+      startI = splitI + 1;
+    else
+      return list[k];
+  }
+}
+
+double quickSelect(double *list, int k, int count)
+{
+  double *tmp = malloc(sizeof(double) * count);
+  memcpy(tmp, list, sizeof(double) * count);
+  double value = _quickSelect(tmp, k, 0, count);
+  free(tmp);
+  return value;
+}
+
