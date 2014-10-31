@@ -45,6 +45,8 @@
 		9BC3698D1A007F2B00B63FF8 /* MDSTransformationFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BC3698B1A007F2B00B63FF8 /* MDSTransformationFunctions.c */; };
 		9BC369921A031A9800B63FF8 /* MDSScalingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC369901A031A9800B63FF8 /* MDSScalingViewController.m */; };
 		9BC369931A031A9800B63FF8 /* MDSScalingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC369911A031A9800B63FF8 /* MDSScalingViewController.xib */; };
+		9BC3699C1A0412F600B63FF8 /* MDSBorderColorableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC3699B1A0412F600B63FF8 /* MDSBorderColorableTextField.m */; };
+		9BC3699F1A04160300B63FF8 /* MDSDoubleValidationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC3699E1A04160300B63FF8 /* MDSDoubleValidationFormatter.m */; };
 		9BE1444A19E3B4FA00FB2294 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444919E3B4FA00FB2294 /* main.m */; };
 		9BE1444D19E3B4FA00FB2294 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444C19E3B4FA00FB2294 /* AppDelegate.m */; };
 		9BE1444F19E3B4FA00FB2294 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1444E19E3B4FA00FB2294 /* Images.xcassets */; };
@@ -159,6 +161,10 @@
 		9BC3698F1A031A9800B63FF8 /* MDSScalingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSScalingViewController.h; path = "View Controllers/MDSScalingViewController.h"; sourceTree = "<group>"; };
 		9BC369901A031A9800B63FF8 /* MDSScalingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSScalingViewController.m; path = "View Controllers/MDSScalingViewController.m"; sourceTree = "<group>"; };
 		9BC369911A031A9800B63FF8 /* MDSScalingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MDSScalingViewController.xib; path = "View Controllers/MDSScalingViewController.xib"; sourceTree = "<group>"; };
+		9BC3699A1A0412F600B63FF8 /* MDSBorderColorableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSBorderColorableTextField.h; path = "Custom Views/MDSBorderColorableTextField.h"; sourceTree = "<group>"; };
+		9BC3699B1A0412F600B63FF8 /* MDSBorderColorableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSBorderColorableTextField.m; path = "Custom Views/MDSBorderColorableTextField.m"; sourceTree = "<group>"; };
+		9BC3699D1A04160300B63FF8 /* MDSDoubleValidationFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSDoubleValidationFormatter.h; path = "MDS9/Number Formatter/MDSDoubleValidationFormatter.h"; sourceTree = "<group>"; };
+		9BC3699E1A04160300B63FF8 /* MDSDoubleValidationFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSDoubleValidationFormatter.m; path = "MDS9/Number Formatter/MDSDoubleValidationFormatter.m"; sourceTree = "<group>"; };
 		9BE1444419E3B4FA00FB2294 /* MDS9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDS9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE1444819E3B4FA00FB2294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE1444919E3B4FA00FB2294 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -214,6 +220,8 @@
 		9B224A0619E4EA9E0064C188 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				9BC3699A1A0412F600B63FF8 /* MDSBorderColorableTextField.h */,
+				9BC3699B1A0412F600B63FF8 /* MDSBorderColorableTextField.m */,
 				9B0E2D2219FDF908004D6765 /* MDSThumbnailView.h */,
 				9B0E2D2319FDF908004D6765 /* MDSThumbnailView.m */,
 				9B0E2D1F19FD7ACB004D6765 /* MDSIconContainerView.h */,
@@ -409,9 +417,19 @@
 			name = "Transformation Functions";
 			sourceTree = "<group>";
 		};
+		9BC369A01A04160800B63FF8 /* Number Formatter */ = {
+			isa = PBXGroup;
+			children = (
+				9BC3699D1A04160300B63FF8 /* MDSDoubleValidationFormatter.h */,
+				9BC3699E1A04160300B63FF8 /* MDSDoubleValidationFormatter.m */,
+			);
+			name = "Number Formatter";
+			sourceTree = "<group>";
+		};
 		9BE1443B19E3B4FA00FB2294 = {
 			isa = PBXGroup;
 			children = (
+				9BC369A01A04160800B63FF8 /* Number Formatter */,
 				9BC3698E1A007F4700B63FF8 /* Transformation Functions */,
 				9BFFF50619EDE4E50074C570 /* Theme */,
 				9B2D883419E8753300C3DFD8 /* Categories */,
@@ -651,8 +669,10 @@
 				9B0E2D2119FD7ACB004D6765 /* MDSIconContainerView.m in Sources */,
 				9B5F9DE819EF8CD9004E29C8 /* MDSDisclosureContentViewController.m in Sources */,
 				9B82279519E3BE3000E7C171 /* FITSFile.m in Sources */,
+				9BC3699F1A04160300B63FF8 /* MDSDoubleValidationFormatter.m in Sources */,
 				9B1EC57F19E5B895009F117A /* MDSFrameView.m in Sources */,
 				9B5F9DDC19EF8467004E29C8 /* MDSMainViewController.m in Sources */,
+				9BC3699C1A0412F600B63FF8 /* MDSBorderColorableTextField.m in Sources */,
 				9B2D883319E8752200C3DFD8 /* NSArray+Map.m in Sources */,
 				9B82279B19E3BE3000E7C171 /* FITSSpectrum.m in Sources */,
 				9B0E2D2419FDF908004D6765 /* MDSThumbnailView.m in Sources */,

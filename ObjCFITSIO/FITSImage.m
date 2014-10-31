@@ -136,9 +136,15 @@ static NSInteger queueCount = 0;
 	NSInteger rowBytes = [bitmapRep bytesPerRow];
 	unsigned char *pix = [bitmapRep bitmapData];
   
-  NSDictionary *coefficients = [self zscaleCoefficientsForImage:imageArray];
-  double z1 = [[coefficients objectForKey:@"z1"] doubleValue];
-  double z2 = [[coefficients objectForKey:@"z2"] doubleValue];
+  NSDictionary *coefficients;
+  double z1 = 0.0;
+  double z2 = 0.0;
+  
+  if (applyZScale) {
+    coefficients = [self zscaleCoefficientsForImage:imageArray];
+    z1 = [[coefficients objectForKey:@"z1"] doubleValue];
+    z2 = [[coefficients objectForKey:@"z2"] doubleValue];
+  }
   
   for (NSInteger i = 0; i < height; ++i) {
     for (NSInteger j = 0; j < width; ++j) {
@@ -312,14 +318,42 @@ static NSInteger queueCount = 0;
 	});
 }
 
+/**
+ *  Down samples an image.
+ *
+ *  @param imageArray original image array
+ *  @param output     an array of length _size.ny
+ */
+- (void)downSampleImageArray:(double *)imageArray output:(double *)output
+{
+  int height = _size.ny;
+  int width  = _size.nx;
+  
+  for (int i = 0; i < height; i++) {
+    for (int j = 0; j < width; j++) {
+      output[i] = imageArray[i * width + rand() % width];
+    }
+  }
+}
+
+- (NSDictionary *)estimatePercentileLow:(double)low high:(double)high OfImageArray:(double *)imageArray
+{
+  double *downSampledImage = malloc(sizeof(double) * _size.ny);
+  [self downSampleImageArray:imageArray output:downSampledImage];
+  double lo = quickSelect(downSampledImage, _size.ny * low, _size.ny);
+  double hi = quickSelect(downSampledImage, _size.ny * high, _size.ny);
+  free(downSampledImage);
+  return @{@"low": @(lo), @"high": @(hi)};
+}
+
 - (void)applyLinearScaleWithBias:(double)bias contrast:(double)contrast
 {
   int count = _size.nx * _size.ny;
 
-  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  NSDictionary *coefficients = [self estimatePercentileLow:0.05 high:0.95 OfImageArray:self.rawIntensity];
   
-  double vmin = [coefficients[@"z1"] doubleValue];
-  double vmax = [coefficients[@"z2"] doubleValue];
+  double vmin = [coefficients[@"low"] doubleValue];
+  double vmax = [coefficients[@"high"] doubleValue];
   
   linear_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, count);
   linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
@@ -331,10 +365,10 @@ static NSInteger queueCount = 0;
 {
   int count = _size.nx * _size.ny;
 
-  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  NSDictionary *coefficients = [self estimatePercentileLow:0.05 high:0.95 OfImageArray:self.rawIntensity];
   
-  double vmin = [coefficients[@"z1"] doubleValue];
-  double vmax = [coefficients[@"z2"] doubleValue];
+  double vmin = [coefficients[@"low"] doubleValue];
+  double vmax = [coefficients[@"high"] doubleValue];
   
   sqrt_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, count);
   linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
@@ -346,10 +380,10 @@ static NSInteger queueCount = 0;
 {
   int count = _size.nx * _size.ny;
 
-  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  NSDictionary *coefficients = [self estimatePercentileLow:0.05 high:0.95 OfImageArray:self.rawIntensity];
   
-  double vmin = [coefficients[@"z1"] doubleValue];
-  double vmax = [coefficients[@"z2"] doubleValue];
+  double vmin = [coefficients[@"low"] doubleValue];
+  double vmax = [coefficients[@"high"] doubleValue];
   
   squared_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, count);
   linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
@@ -361,15 +395,11 @@ static NSInteger queueCount = 0;
 {
   int count = _size.nx * _size.ny;
 
-  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  NSDictionary *coefficients = [self estimatePercentileLow:0.05 high:0.95 OfImageArray:self.rawIntensity];
+    
+  double vmin = [coefficients[@"low"] doubleValue];
+  double vmax = [coefficients[@"high"] doubleValue];
   
-  double vmin = [coefficients[@"z1"] doubleValue];
-  double vmax = [coefficients[@"z2"] doubleValue];
-  
-//  for (int i = 0; i < count; i++) {
-//    NSLog(@"%f", self.currentApparentIntensity[i]);
-//  }
-//  
   asinh_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, count);
   
   linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
@@ -383,10 +413,10 @@ static NSInteger queueCount = 0;
   
   int count = _size.nx * _size.ny;
   
-  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  NSDictionary *coefficients = [self estimatePercentileLow:0.05 high:0.95 OfImageArray:self.rawIntensity];
   
-  double vmin = [coefficients[@"z1"] doubleValue];
-  double vmax = [coefficients[@"z2"] doubleValue];
+  double vmin = [coefficients[@"low"] doubleValue];
+  double vmax = [coefficients[@"high"] doubleValue];
   
   log_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, exp, count);
   linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);
@@ -398,10 +428,10 @@ static NSInteger queueCount = 0;
 {
   int count = _size.nx * _size.ny;
 
-  NSDictionary *coefficients = [self zscaleCoefficientsForImage:self.rawIntensity];
+  NSDictionary *coefficients = [self estimatePercentileLow:0.05 high:0.95 OfImageArray:self.rawIntensity];
   
-  double vmin = [coefficients[@"z1"] doubleValue];
-  double vmax = [coefficients[@"z2"] doubleValue];
+  double vmin = [coefficients[@"low"] doubleValue];
+  double vmax = [coefficients[@"high"] doubleValue];
   
   pow_warp(self.currentApparentIntensity, self.rawIntensity, vmin, vmax, bias, contrast, exp, count);
   linear_mult(self.currentApparentIntensity, self.currentApparentIntensity, 255.0, count);

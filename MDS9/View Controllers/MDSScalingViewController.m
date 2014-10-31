@@ -7,12 +7,16 @@
 //
 
 #import "MDSScalingViewController.h"
+#import "MDSTheme.h"
+#import "MDSBorderColorableTextField.h"
+#import "MDSDoubleValidationFormatter.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface MDSScalingViewController ()
 
 @property (weak) IBOutlet NSSlider *biasSlider;
 @property (weak) IBOutlet NSSlider *contrastSlider;
+@property (weak) IBOutlet MDSBorderColorableTextField *exponentField;
 
 @property (nonatomic) CGFloat bias;
 @property (nonatomic) CGFloat contrast;
@@ -39,6 +43,8 @@
     return [RACSignal empty];
   }];
   
+  self.exponentField.borderColor = [MDSTheme separatorColor];
+  self.exponentField.formatter = [[MDSDoubleValidationFormatter alloc] init];
 }
 
 @end

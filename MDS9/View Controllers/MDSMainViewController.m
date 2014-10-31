@@ -149,7 +149,7 @@
                                                                                    bundle:[NSBundle mainBundle]];
   [rightHeaderVC addSectionWithViewController:tableVC
                                         title:@"Headers"
-                              preferredHeight:200
+                              preferredHeight:400
                                    setupBlock:nil];
   
   MDSRightViewController *rightThumbnailVC = [[MDSRightViewController alloc] initWithNibName:@"MDSRightViewController"

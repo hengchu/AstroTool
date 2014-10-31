@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="biasSlider" destination="Fcp-69-Gvf" id="2Nb-qK-Pyo"/>
                 <outlet property="contrastSlider" destination="0Su-2p-1Rr" id="Ag0-Ar-U5Y"/>
+                <outlet property="exponentField" destination="mev-yu-sIx" id="ITw-rV-pgt"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -49,9 +50,9 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mev-yu-sIx">
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mev-yu-sIx" customClass="MDSBorderColorableTextField">
                     <rect key="frame" x="93" y="17" width="87" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="mPR-XZ-awZ">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" alignment="right" placeholderString="1000.0" drawsBackground="YES" id="mPR-XZ-awZ">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
