@@ -164,8 +164,9 @@
   }] subscribeNext:^(id x) {
     RACTupleUnpack(NSNumber *bias, NSNumber *contrast) = x;
     if (self.centerVC.frameView.imageView.fitsImage) {
-      [self.centerVC.frameView.imageView.fitsImage applyAsinhScaleWithBias:bias.doubleValue
-                                                                contrast:contrast.doubleValue];
+      [self.centerVC.frameView.imageView.fitsImage applyLogScaleWithBias:bias.doubleValue
+                                                                contrast:contrast.doubleValue
+                                                                exponent:1000.0];
     }
   }];
   

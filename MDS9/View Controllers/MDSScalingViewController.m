@@ -44,7 +44,7 @@
   }];
   
   self.exponentField.borderColor = [MDSTheme separatorColor];
-  self.exponentField.formatter = [[MDSDoubleValidationFormatter alloc] init];
+  self.exponentField.formatter   = [[MDSDoubleValidationFormatter alloc] init];
 }
 
 @end

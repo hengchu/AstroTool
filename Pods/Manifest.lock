@@ -1,4 +1,5 @@
 PODS:
+  - CorePlot (1.5.1)
   - PureLayout (1.1.0)
   - ReactiveCocoa (2.3.1):
     - ReactiveCocoa/UI
@@ -9,10 +10,12 @@ PODS:
     - ReactiveCocoa/Core
 
 DEPENDENCIES:
+  - CorePlot (~> 1.5)
   - PureLayout (~> 1.1)
   - ReactiveCocoa (~> 2.3.1)
 
 SPEC CHECKSUMS:
+  CorePlot: b15cb1a9a687b9576545104248d6e22033e678bb
   PureLayout: c8960fa0f3b40d849d5e177d699d0148faa63b63
   ReactiveCocoa: dca75777b9d18990c8714a3a6f2149f29b4d1462
 
