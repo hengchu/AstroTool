@@ -8,9 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef NS_ENUM(NSUInteger, MDSScaleType) {
+  MDSLinearScale,
+  MDSLogScale,
+  MDSPowerScale,
+  MDSAsinhScale,
+  MDSSqrtScale,
+  MDSSquaredScale,
+  MDSZScale
+};
+
 @interface MDSScalingViewController : NSViewController
 
 @property (nonatomic, readonly) CGFloat bias;
 @property (nonatomic, readonly) CGFloat contrast;
+@property (nonatomic, readonly) MDSScaleType scaleType;
 
 @end

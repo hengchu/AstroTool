@@ -157,16 +157,50 @@
   MDSScalingViewController *scalingVC = [[MDSScalingViewController alloc] initWithNibName:@"MDSScalingViewController"
                                                                                    bundle:[NSBundle mainBundle]];
   
-  [[RACSignal combineLatest:@[RACObserve(scalingVC, bias), RACObserve(scalingVC, contrast)]
-                    reduce:^(NSNumber *bias, NSNumber *contrast)
+  [[RACSignal combineLatest:@[RACObserve(scalingVC, bias), RACObserve(scalingVC, contrast),
+                              RACObserve(scalingVC, scaleType)]
+                    reduce:^(NSNumber *bias, NSNumber *contrast, NSNumber *scaleType)
   {
-    return RACTuplePack(bias, contrast);
+    return RACTuplePack(bias, contrast, scaleType);
   }] subscribeNext:^(id x) {
-    RACTupleUnpack(NSNumber *bias, NSNumber *contrast) = x;
+    RACTupleUnpack(NSNumber *bias, NSNumber *contrast, NSNumber *scaleType) = x;
     if (self.centerVC.frameView.imageView.fitsImage) {
-      [self.centerVC.frameView.imageView.fitsImage applyLogScaleWithBias:bias.doubleValue
-                                                                contrast:contrast.doubleValue
-                                                                exponent:1000.0];
+      FITSImage *image = self.centerVC.frameView.imageView.fitsImage;
+      MDSScaleType scale = [scaleType unsignedIntegerValue];
+      NSLog(@"Scale: %@", scaleType);
+      switch (scale) {
+        case MDSLinearScale:
+          NSLog(@"linear");
+          [image applyLinearScaleWithBias:bias.doubleValue contrast:contrast.doubleValue];
+          break;
+        case MDSLogScale:
+          NSLog(@"log");
+          [image applyLogScaleWithBias:bias.doubleValue contrast:contrast.doubleValue exponent:1000.0];
+          break;
+        case MDSAsinhScale:
+          NSLog(@"asinh");
+          [image applyAsinhScaleWithBias:bias.doubleValue contrast:contrast.doubleValue];
+          break;
+        case MDSPowerScale:
+          NSLog(@"power");
+          [image applyPowerScaleWithBias:bias.doubleValue contrast:contrast.doubleValue exponent:1000.0];
+          break;
+        case MDSSqrtScale:
+          NSLog(@"sqrt");
+          [image applySqrtScaleWithBias:bias.doubleValue contrast:contrast.doubleValue];
+          break;
+        case MDSSquaredScale:
+          NSLog(@"squared");
+          [image applySquaredScaleWithBias:bias.doubleValue contrast:contrast.doubleValue];
+          break;
+        case MDSZScale:
+          NSLog(@"zscale");
+          [image setImageData:image.rawIntensity];
+          break;
+        default:
+          break;
+          
+      }
     }
   }];
   

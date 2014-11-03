@@ -104,7 +104,9 @@ static NSInteger queueCount = 0;
 - (void)setImageData:(double *)rawImageData
 {	
 	if ([self is2D]) {
-    memcpy(self.rawIntensity, rawImageData, sizeof(double) * _size.nx * _size.ny);
+    if (self.rawIntensity != rawImageData) {
+      memcpy(self.rawIntensity, rawImageData, sizeof(double) * _size.nx * _size.ny);
+    }
 		[self set2DImageData:rawImageData];
 	}
 	else if ([self is1D]) {
