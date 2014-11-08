@@ -157,7 +157,8 @@
   MDSScalingViewController *scalingVC = [[MDSScalingViewController alloc] initWithNibName:@"MDSScalingViewController"
                                                                                    bundle:[NSBundle mainBundle]];
   
-  [[RACSignal combineLatest:@[RACObserve(scalingVC, bias), RACObserve(scalingVC, contrast),
+  [[RACSignal combineLatest:@[RACObserve(scalingVC, bias),
+                              RACObserve(scalingVC, contrast),
                               RACObserve(scalingVC, scaleType)]
                     reduce:^(NSNumber *bias, NSNumber *contrast, NSNumber *scaleType)
   {
@@ -167,39 +168,30 @@
     if (self.centerVC.frameView.imageView.fitsImage) {
       FITSImage *image = self.centerVC.frameView.imageView.fitsImage;
       MDSScaleType scale = [scaleType unsignedIntegerValue];
-      NSLog(@"Scale: %@", scaleType);
       switch (scale) {
         case MDSLinearScale:
-          NSLog(@"linear");
           [image applyLinearScaleWithBias:bias.doubleValue contrast:contrast.doubleValue];
           break;
         case MDSLogScale:
-          NSLog(@"log");
           [image applyLogScaleWithBias:bias.doubleValue contrast:contrast.doubleValue exponent:1000.0];
           break;
         case MDSAsinhScale:
-          NSLog(@"asinh");
           [image applyAsinhScaleWithBias:bias.doubleValue contrast:contrast.doubleValue];
           break;
         case MDSPowerScale:
-          NSLog(@"power");
           [image applyPowerScaleWithBias:bias.doubleValue contrast:contrast.doubleValue exponent:1000.0];
           break;
         case MDSSqrtScale:
-          NSLog(@"sqrt");
           [image applySqrtScaleWithBias:bias.doubleValue contrast:contrast.doubleValue];
           break;
         case MDSSquaredScale:
-          NSLog(@"squared");
           [image applySquaredScaleWithBias:bias.doubleValue contrast:contrast.doubleValue];
           break;
         case MDSZScale:
-          NSLog(@"zscale");
           [image setImageData:image.rawIntensity];
           break;
         default:
           break;
-          
       }
     }
   }];
@@ -237,6 +229,7 @@
       vc.view.hidden = YES;
     }
     rightVC.view.hidden = NO;
+    // Let stack unwind first, so we're out of mouseDown.
     [self performSelector:@selector(highLightButton:) withObject:input afterDelay:0.0f];
     return [RACSignal empty];
   }];
@@ -247,13 +240,6 @@
 - (void)highLightButton:(NSButton *)button
 {
   button.highlighted = YES;
-}
-
-#pragma mark - MDSMenuControllerDelegate
-
-- (void)didOpenFileWithURL:(NSURL *)url
-{
-  [self.centerVC openFileWithURL:url];
 }
 
 @end

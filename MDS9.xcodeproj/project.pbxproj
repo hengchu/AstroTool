@@ -12,6 +12,8 @@
 		9B0E2D2419FDF908004D6765 /* MDSThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0E2D2319FDF908004D6765 /* MDSThumbnailView.m */; };
 		9B1EC57C19E5B6F6009F117A /* FITSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1EC57B19E5B6F6009F117A /* FITSImageView.m */; };
 		9B1EC57F19E5B895009F117A /* MDSFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1EC57E19E5B895009F117A /* MDSFrameView.m */; };
+		9B1EE2231A0D452E00A77CF0 /* MDSHistogramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1EE2211A0D452E00A77CF0 /* MDSHistogramViewController.m */; };
+		9B1EE2241A0D452E00A77CF0 /* MDSHistogramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B1EE2221A0D452E00A77CF0 /* MDSHistogramViewController.xib */; };
 		9B24FB8C19E5C52600CEDCF6 /* MDSCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B24FB8A19E5C52600CEDCF6 /* MDSCenterViewController.m */; };
 		9B24FB8D19E5C52600CEDCF6 /* MDSCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B24FB8B19E5C52600CEDCF6 /* MDSCenterViewController.xib */; };
 		9B270D0319ECF4E5004FA723 /* MDSHeaderTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B270D0219ECF4E5004FA723 /* MDSHeaderTableRowView.m */; };
@@ -47,6 +49,7 @@
 		9BC369931A031A9800B63FF8 /* MDSScalingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BC369911A031A9800B63FF8 /* MDSScalingViewController.xib */; };
 		9BC3699C1A0412F600B63FF8 /* MDSBorderColorableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC3699B1A0412F600B63FF8 /* MDSBorderColorableTextField.m */; };
 		9BC3699F1A04160300B63FF8 /* MDSDoubleValidationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC3699E1A04160300B63FF8 /* MDSDoubleValidationFormatter.m */; };
+		9BC369CF1A073ABA00B63FF8 /* MDSAbstractHistogram.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC369CE1A073ABA00B63FF8 /* MDSAbstractHistogram.m */; };
 		9BE1444A19E3B4FA00FB2294 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444919E3B4FA00FB2294 /* main.m */; };
 		9BE1444D19E3B4FA00FB2294 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1444C19E3B4FA00FB2294 /* AppDelegate.m */; };
 		9BE1444F19E3B4FA00FB2294 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BE1444E19E3B4FA00FB2294 /* Images.xcassets */; };
@@ -77,6 +80,9 @@
 		9B1EC57B19E5B6F6009F117A /* FITSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FITSImageView.m; path = "Custom Views/FITSImageView.m"; sourceTree = "<group>"; };
 		9B1EC57D19E5B895009F117A /* MDSFrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSFrameView.h; path = "Custom Views/MDSFrameView.h"; sourceTree = "<group>"; };
 		9B1EC57E19E5B895009F117A /* MDSFrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSFrameView.m; path = "Custom Views/MDSFrameView.m"; sourceTree = "<group>"; };
+		9B1EE2201A0D452E00A77CF0 /* MDSHistogramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSHistogramViewController.h; path = "View Controllers/MDSHistogramViewController.h"; sourceTree = "<group>"; };
+		9B1EE2211A0D452E00A77CF0 /* MDSHistogramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSHistogramViewController.m; path = "View Controllers/MDSHistogramViewController.m"; sourceTree = "<group>"; };
+		9B1EE2221A0D452E00A77CF0 /* MDSHistogramViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MDSHistogramViewController.xib; path = "View Controllers/MDSHistogramViewController.xib"; sourceTree = "<group>"; };
 		9B24FB8919E5C52600CEDCF6 /* MDSCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSCenterViewController.h; path = "View Controllers/MDSCenterViewController.h"; sourceTree = "<group>"; };
 		9B24FB8A19E5C52600CEDCF6 /* MDSCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSCenterViewController.m; path = "View Controllers/MDSCenterViewController.m"; sourceTree = "<group>"; };
 		9B24FB8B19E5C52600CEDCF6 /* MDSCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MDSCenterViewController.xib; path = "View Controllers/MDSCenterViewController.xib"; sourceTree = "<group>"; };
@@ -165,6 +171,8 @@
 		9BC3699B1A0412F600B63FF8 /* MDSBorderColorableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSBorderColorableTextField.m; path = "Custom Views/MDSBorderColorableTextField.m"; sourceTree = "<group>"; };
 		9BC3699D1A04160300B63FF8 /* MDSDoubleValidationFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSDoubleValidationFormatter.h; path = "MDS9/Number Formatter/MDSDoubleValidationFormatter.h"; sourceTree = "<group>"; };
 		9BC3699E1A04160300B63FF8 /* MDSDoubleValidationFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSDoubleValidationFormatter.m; path = "MDS9/Number Formatter/MDSDoubleValidationFormatter.m"; sourceTree = "<group>"; };
+		9BC369CD1A073ABA00B63FF8 /* MDSAbstractHistogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDSAbstractHistogram.h; path = "MDS9/Abstract Objects/MDSAbstractHistogram.h"; sourceTree = "<group>"; };
+		9BC369CE1A073ABA00B63FF8 /* MDSAbstractHistogram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDSAbstractHistogram.m; path = "MDS9/Abstract Objects/MDSAbstractHistogram.m"; sourceTree = "<group>"; };
 		9BE1444419E3B4FA00FB2294 /* MDS9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDS9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE1444819E3B4FA00FB2294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BE1444919E3B4FA00FB2294 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -243,6 +251,9 @@
 		9B24FB8E19E5C52B00CEDCF6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9B1EE2201A0D452E00A77CF0 /* MDSHistogramViewController.h */,
+				9B1EE2211A0D452E00A77CF0 /* MDSHistogramViewController.m */,
+				9B1EE2221A0D452E00A77CF0 /* MDSHistogramViewController.xib */,
 				9BC3698F1A031A9800B63FF8 /* MDSScalingViewController.h */,
 				9BC369901A031A9800B63FF8 /* MDSScalingViewController.m */,
 				9BC369911A031A9800B63FF8 /* MDSScalingViewController.xib */,
@@ -426,9 +437,19 @@
 			name = "Number Formatter";
 			sourceTree = "<group>";
 		};
+		9BC369D01A073ABE00B63FF8 /* Abstract Objects */ = {
+			isa = PBXGroup;
+			children = (
+				9BC369CD1A073ABA00B63FF8 /* MDSAbstractHistogram.h */,
+				9BC369CE1A073ABA00B63FF8 /* MDSAbstractHistogram.m */,
+			);
+			name = "Abstract Objects";
+			sourceTree = "<group>";
+		};
 		9BE1443B19E3B4FA00FB2294 = {
 			isa = PBXGroup;
 			children = (
+				9BC369D01A073ABE00B63FF8 /* Abstract Objects */,
 				9BC369A01A04160800B63FF8 /* Number Formatter */,
 				9BC3698E1A007F4700B63FF8 /* Transformation Functions */,
 				9BFFF50619EDE4E50074C570 /* Theme */,
@@ -589,6 +610,7 @@
 				9B5F9DE219EF867E004E29C8 /* MDSHeaderTableViewController.xib in Resources */,
 				9B87CCB819E7A747001891F9 /* MDSRightViewController.xib in Resources */,
 				9B333EA119E5D3D90065D78A /* MDSMenu.xib in Resources */,
+				9B1EE2241A0D452E00A77CF0 /* MDSHistogramViewController.xib in Resources */,
 				9B5F9DDD19EF8467004E29C8 /* MDSMainViewController.xib in Resources */,
 				9BC369931A031A9800B63FF8 /* MDSScalingViewController.xib in Resources */,
 				9B82279D19E3BE3000E7C171 /* ObjCFITSIO-Info.plist in Resources */,
@@ -661,6 +683,7 @@
 				9B82279919E3BE3000E7C171 /* FITSImage+Scaling.m in Sources */,
 				9BE1444A19E3B4FA00FB2294 /* main.m in Sources */,
 				9B82279619E3BE3000E7C171 /* FITSHDU.m in Sources */,
+				9BC369CF1A073ABA00B63FF8 /* MDSAbstractHistogram.m in Sources */,
 				9BC3698D1A007F2B00B63FF8 /* MDSTransformationFunctions.c in Sources */,
 				9B5F9DE119EF867E004E29C8 /* MDSHeaderTableViewController.m in Sources */,
 				9B82279A19E3BE3000E7C171 /* FITSImage.m in Sources */,
@@ -675,6 +698,7 @@
 				9BC3699C1A0412F600B63FF8 /* MDSBorderColorableTextField.m in Sources */,
 				9B2D883319E8752200C3DFD8 /* NSArray+Map.m in Sources */,
 				9B82279B19E3BE3000E7C171 /* FITSSpectrum.m in Sources */,
+				9B1EE2231A0D452E00A77CF0 /* MDSHistogramViewController.m in Sources */,
 				9B0E2D2419FDF908004D6765 /* MDSThumbnailView.m in Sources */,
 				9BFFF50519EDE4DD0074C570 /* MDSTheme.m in Sources */,
 				9B82279819E3BE3000E7C171 /* FITSHeaderLine.m in Sources */,
@@ -792,6 +816,7 @@
 			baseConfigurationReference = 63B58B84DAED815B2096E918 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MDS9/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -809,6 +834,7 @@
 			baseConfigurationReference = 0482E64C4FF499DE955F3DDC /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MDS9/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

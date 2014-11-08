@@ -38,7 +38,6 @@
   [menuNib instantiateWithOwner:menuController topLevelObjects:nil];
   
   MDSMainViewController *mainVC = [[MDSMainViewController alloc] init];
-  menuController.delegate = mainVC;
   [[NSApplication sharedApplication] setMainMenu:menuController.menu];
   
   self.window.contentViewController = mainVC;

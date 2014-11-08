@@ -20,13 +20,17 @@
   NSOpenPanel *panel = [self _openPanel];
   [panel beginWithCompletionHandler:^(NSInteger result) {
     if (result == NSFileHandlingPanelOKButton) {
-      if ([self.delegate respondsToSelector:@selector(didOpenFileWithURL:)]) {
-        [self.delegate didOpenFileWithURL:panel.URL];
-      } else {
-        NSLog(@"%@", self.delegate);
-      }
+      [[NSNotificationCenter defaultCenter] postNotificationName:kMDSMenuDidOpenFileNotification
+                                                          object:self
+                                                        userInfo:@{@"fileURL":panel.URL}];
     }
   }];
+}
+
+- (void)wantsHistogram:(id)sender
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:kMDSMenuWantHistogramNotification
+                                                      object:self];
 }
 
 - (NSOpenPanel *)_openPanel

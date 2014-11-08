@@ -9,16 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
-@protocol MDSMenuControllerDelegate <NSObject>
-
-/**
- *  @p MDSMenuController calls this method when user opens a file.
- *
- *  @param url URL of the file opened.
- */
-- (void)didOpenFileWithURL:(NSURL *)url;
-
-@end
+static NSString * kMDSMenuDidOpenFileNotification = @"kMDSMenuDidOpenFileNotification";
+static NSString * kMDSMenuWantHistogramNotification = @"kMDSMenuWantHistogramNotification";
 
 @interface MDSMenuController : NSObject
 
@@ -26,10 +18,5 @@
  *  The @p NSMenu object instantiated from Nib.
  */
 @property (strong) IBOutlet NSMenu *menu;
-
-/**
- *  Delegate to the menu controller.
- */
-@property (nonatomic, weak) id<MDSMenuControllerDelegate> delegate;
 
 @end
